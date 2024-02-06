@@ -7,6 +7,7 @@ const urls = {
   ping: 'ping.json',
 
   register: '/user/register',
+  login: '/user/login',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -34,3 +35,4 @@ export const ping = () => callAPI(urls.ping, 'get');
 export const postRegister = (data) => {
   callAPI(urls.register, 'POST', {}, {}, data);
 };
+export const postLogin = (data) => callAPI(urls.login, 'POST', {}, {}, data);

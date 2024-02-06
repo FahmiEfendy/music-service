@@ -26,11 +26,11 @@ const Register = ({ register }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState('username');
-  const [fullname, setFullname] = useState('fullname');
-  const [password, setPassword] = useState('password123');
-  const [confirmPassword, setConfirmPassword] = useState('password123');
-  const [role, setRole] = useState('artist');
+  const [username, setUsername] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('');
 
   const registerHandler = () => {
     // TODO: Add Validation
