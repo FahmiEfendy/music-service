@@ -1,22 +1,24 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import NightsStayIcon from '@mui/icons-material/NightsStay';
+import { connect, useDispatch } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import { setLocale, setTheme } from '@containers/App/actions';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Avatar, Button, Menu, MenuItem } from '@mui/material';
+
+import { selectLogin } from '@pages/Login/selectors';
+import { setLogin, setToken } from '@containers/Client/actions';
+import { selectLogin as isSelectLogin } from '@containers/Client/selectors';
 
 import classes from './style.module.scss';
+import ProfilePicture from '../../assets/profile.jpg';
 
-const Navbar = ({ title, locale, theme }) => {
+const Navbar = ({ title, login, isLogin }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [menuPosition, setMenuPosition] = useState(null);
   const open = Boolean(menuPosition);
 
@@ -28,19 +30,13 @@ const Navbar = ({ title, locale, theme }) => {
     setMenuPosition(null);
   };
 
-  const handleTheme = () => {
-    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
-  };
-
-  const onSelectLang = (lang) => {
-    if (lang !== locale) {
-      dispatch(setLocale(lang));
-    }
-    handleClose();
-  };
-
   const goHome = () => {
     navigate('/');
+  };
+
+  const logoutHandler = () => {
+    dispatch(setLogin(false));
+    dispatch(setToken(null));
   };
 
   return (
@@ -50,34 +46,45 @@ const Navbar = ({ title, locale, theme }) => {
           <img src="/vite.svg" alt="logo" className={classes.logo} />
           <div className={classes.title}>{title}</div>
         </div>
-        <div className={classes.toolbar}>
-          <div className={classes.theme} onClick={handleTheme} data-testid="toggleTheme">
-            {theme === 'light' ? <NightsStayIcon /> : <LightModeIcon />}
-          </div>
-          <div className={classes.toggle} onClick={handleClick}>
-            <Avatar className={classes.avatar} src={locale === 'id' ? '/id.png' : '/en.png'} />
-            <div className={classes.lang}>{locale}</div>
-            <ExpandMoreIcon />
-          </div>
-        </div>
-        <Menu open={open} anchorEl={menuPosition} onClose={handleClose}>
-          <MenuItem onClick={() => onSelectLang('id')} selected={locale === 'id'}>
-            <div className={classes.menu}>
-              <Avatar className={classes.menuAvatar} src="/id.png" />
-              <div className={classes.menuLang}>
-                <FormattedMessage id="app_lang_id" />
+
+        {isLogin ? (
+          <>
+            <div className={classes.toolbar}>
+              {/* Profile Button */}
+              <div className={classes.toggle} onClick={handleClick}>
+                {/* GET Profile Picture */}
+                <Avatar className={classes.avatar} src={ProfilePicture} />
+                <div className={classes.lang}>{login.data.fullname}</div>
+                <ExpandMoreIcon />
               </div>
             </div>
-          </MenuItem>
-          <MenuItem onClick={() => onSelectLang('en')} selected={locale === 'en'}>
-            <div className={classes.menu}>
-              <Avatar className={classes.menuAvatar} src="/en.png" />
-              <div className={classes.menuLang}>
-                <FormattedMessage id="app_lang_en" />
-              </div>
-            </div>
-          </MenuItem>
-        </Menu>
+            {/* Profile Dropdown */}
+            <Menu open={open} anchorEl={menuPosition} onClose={handleClose} className={classes.menu_container}>
+              <MenuItem
+                onClick={() => {
+                  navigate(`/user/detail/${login.data.id}`);
+                }}
+              >
+                <div className={classes.menu}>
+                  <div className={classes.menuLang}>
+                    <FormattedMessage id="nav_profile" />
+                  </div>
+                </div>
+              </MenuItem>
+              <MenuItem onClick={logoutHandler}>
+                <div className={classes.menu}>
+                  <div className={classes.menuLang}>
+                    <FormattedMessage id="nav_logout" />
+                  </div>
+                </div>
+              </MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <Button type="button" variant="contained" className={classes.login_btn} onClick={() => navigate('/login')}>
+            Login
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -85,8 +92,13 @@ const Navbar = ({ title, locale, theme }) => {
 
 Navbar.propTypes = {
   title: PropTypes.string,
-  locale: PropTypes.string.isRequired,
-  theme: PropTypes.string,
+  login: PropTypes.object,
+  isLogin: PropTypes.bool,
 };
 
-export default Navbar;
+const mapStateToProps = createStructuredSelector({
+  login: selectLogin,
+  isLogin: isSelectLogin,
+});
+
+export default connect(mapStateToProps)(Navbar);

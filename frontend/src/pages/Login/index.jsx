@@ -33,9 +33,11 @@ const Login = ({ login }) => {
     setUsername('');
     setPassword('');
 
-    dispatch(setLogin(true));
-    dispatch(setToken(login.data.token));
-    navigate('/');
+    if (login.data.token) {
+      dispatch(setLogin(true));
+      dispatch(setToken(login.data.token));
+      navigate('/');
+    }
   };
 
   return (
