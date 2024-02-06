@@ -4,18 +4,32 @@ const userHelper = require("../helpers/userHelper");
 const generalHelper = require("../helpers/generalHelper");
 const validationHelper = require("../helpers/validationHelper");
 const userMiddleware = require("../middlewares/userMiddleware");
+const { decryptTextPayload } = require("../../utils/decryptPayload");
 
 const register = async (req, res) => {
-  const { username, fullname, password, role } = req.body;
+  const { username, fullname, password, confirmPassword, role } = req.body;
+
+  const decryptedUsername = decryptTextPayload(username);
+  const decryptedFullname = decryptTextPayload(fullname);
+  const decryptedPassword = decryptTextPayload(password);
+  const decryptedConfirmPassword = decryptTextPayload(confirmPassword);
+
+  const validateData = {
+    username: decryptedUsername,
+    fullname: decryptedFullname,
+    role,
+    password: decryptedPassword,
+    confirmPassword: decryptedConfirmPassword,
+  };
 
   try {
-    validationHelper.registerValidation(req.body);
+    validationHelper.registerValidation(validateData);
 
     const response = await userHelper.postRegister({
-      username,
-      fullname,
+      username: decryptedUsername,
+      fullname: decryptedFullname,
       role,
-      password,
+      password: decryptedPassword,
     });
 
     res
@@ -31,10 +45,21 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { username, password } = req.body;
 
-  try {
-    validationHelper.loginValidation(req.body);
+  const decryptedUsername = decryptTextPayload(username);
+  const decryptedPassword = decryptTextPayload(password);
 
-    const response = await userHelper.postLogin({ username, password });
+  const validateData = {
+    username: decryptedUsername,
+    password: decryptedPassword,
+  };
+
+  try {
+    validationHelper.loginValidation(validateData);
+
+    const response = await userHelper.postLogin({
+      username: decryptedUsername,
+      password: decryptedPassword,
+    });
 
     res.status(200).send({ message: "Successfully Login", data: response });
   } catch (err) {
