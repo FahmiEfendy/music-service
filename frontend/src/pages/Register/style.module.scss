@@ -1,0 +1,74 @@
+@import "../../styles/base.scss";
+
+.register_container {
+    @include directionX;
+    align-items: center;
+    height: 100vh;
+
+    .register_container_inner{
+        @include directionX;
+        border-radius: 10px;
+        padding: 1rem;
+        background-color: white;
+        
+        .wrapper_left{
+            border-radius: 10px;
+            width: 55%;
+            background-image: url("../../assets/register.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+        
+        .wrapper_right{
+            width: 45%;
+            padding: 2rem;
+
+            h5{
+                @include font(30px, $font-weight-medium, $text-color-secondary);
+                text-align: center;
+            }
+
+            .form{
+                @include directionY;
+                margin-top: 1rem;
+                
+                .form_label{
+                    @include font(14px, $font-weight-light, $text-color-secondary);
+                    margin-bottom: .2rem
+                }
+
+                input {
+                    @include font(16px, $font-weight-regular, $text-color-secondary);
+                }
+
+                .radio {
+                    @include directionX;
+
+                    .radio_label{
+                        span {
+                            @include font(16px, $font-weight-light, $text-color-secondary);
+                        }
+                    }
+                }
+
+                button {
+                    text-transform: capitalize;
+                }
+            }
+
+          
+
+            .login{
+                text-align: center;
+                margin-top: .5rem;
+                @include font(14px, $font-weight-light, $text-color-third);
+
+                a {
+                text-decoration: underline;
+                cursor: pointer;
+                }
+            }
+        }
+    }
+}
