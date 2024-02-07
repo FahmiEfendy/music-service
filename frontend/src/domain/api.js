@@ -8,6 +8,7 @@ const urls = {
 
   register: '/user/register',
   login: '/user/login',
+  userList: '/user',
   userDetail: '/user/detail',
   updateProfile: '/user/update-profile',
 };
@@ -38,6 +39,7 @@ export const postRegister = (data) => {
   callAPI(urls.register, 'POST', {}, {}, data);
 };
 export const postLogin = (data) => callAPI(urls.login, 'POST', {}, {}, data);
+export const getUserList = (params) => callAPI(urls.userList, 'GET', {}, params, {});
 export const getUserDetail = () => callAPI(urls.userDetail, 'GET');
 export const patchUpdateProfile = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };

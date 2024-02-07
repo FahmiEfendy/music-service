@@ -72,7 +72,7 @@ const login = async (req, res) => {
 
 const userList = async (req, res) => {
   try {
-    const response = await userHelper.getUserList();
+    const response = await userHelper.getUserList(req.query);
 
     res
       .status(200)

@@ -76,7 +76,7 @@ const Register = ({ register }) => {
           </FormControl>
           <FormControl className={classes.form}>
             <FormLabel className={classes.form_label}>
-              <FormattedMessage id="home_input_password" />
+              <FormattedMessage id="login_input_password" />
             </FormLabel>
             <TextField type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </FormControl>

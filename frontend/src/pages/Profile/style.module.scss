@@ -65,7 +65,8 @@
 
                 p {
                     @include font(20px, $font-weight-regular, $text-color-secondary);
-                    margin-top: .5rem
+                    margin-top: .5rem;
+                    text-align: center;
                 }
 
                 input {

@@ -24,9 +24,11 @@ const __generateToken = (data) => {
   return jwt.sign(data, jwtSecretToken, { expiresIn: jwtExpiresIn });
 };
 
-const getUserList = async () => {
+const getUserList = async (query) => {
   try {
-    const data = await db.User.findAll();
+    const data = await db.User.findAll({
+      where: query?.role ? { role: query.role } : {},
+    });
 
     console.log([fileName, "GET All User", "INFO"]);
 
