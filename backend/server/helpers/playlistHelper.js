@@ -3,6 +3,7 @@ const Boom = require("boom");
 
 const db = require("../../models");
 const generalHelper = require("./generalHelper");
+const { uploadToCloudinary } = require("../../utils/cloudinary");
 
 const fileName = "server/helpers/playlistHelper.js";
 
@@ -58,7 +59,7 @@ const getPlaylistDetail = async (objectData) => {
 };
 
 const postCreatePlaylist = async (objectData) => {
-  const { id, username, name } = objectData;
+  const { id, username, name, playlistCover } = objectData;
 
   const playlistList = await getPlaylistList();
 
@@ -71,10 +72,17 @@ const postCreatePlaylist = async (objectData) => {
       throw Boom.unauthorized("You must login first to create a playlist!");
     }
 
+    const imageResult = await uploadToCloudinary(
+      playlistCover,
+      "image",
+      "image/playlistCover"
+    );
+
     const newData = db.Playlist.build({
       id: `playlist-${playlistList.length + 1}`,
       name,
       user_id: id,
+      playlistCover: imageResult.url,
     });
 
     await newData.save();

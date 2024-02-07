@@ -11,6 +11,8 @@ const urls = {
   userList: '/user',
   userDetail: '/user/detail',
   updateProfile: '/user/update-profile',
+
+  playlistList: '/playlist',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -45,3 +47,4 @@ export const patchUpdateProfile = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
 };
+export const getplaylistList = () => callAPI(urls.playlistList, 'GET');

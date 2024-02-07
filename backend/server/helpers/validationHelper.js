@@ -41,6 +41,7 @@ const playlistRequestValidation = (data, isUpdate = false) => {
       : Joi.string()
           .required()
           .description("Playlist name, i.e. Morning Music"),
+    playlistCover: Joi.object().optional().description("Playlist Cover"),
   });
 
   if (schema.validate(data).error) {

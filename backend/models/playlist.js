@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   Playlist.init(
     {
       name: DataTypes.STRING,
+      playlistCover: DataTypes.STRING,
     },
     {
       sequelize,

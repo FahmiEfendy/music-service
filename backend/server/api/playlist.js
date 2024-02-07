@@ -1,5 +1,6 @@
 const Router = require("express").Router();
 
+const uploadMedia = require("../middlewares/uploadMedia");
 const playlistHelper = require("../helpers/playlistHelper");
 const validationHelper = require("../helpers/validationHelper");
 const userMiddleware = require("../middlewares/userMiddleware");
@@ -33,9 +34,19 @@ const playlistDetail = async (req, res) => {
 
 const createPlaylist = async (req, res) => {
   try {
-    validationHelper.playlistRequestValidation({ name: req.body.name });
+    const validateData = {
+      name: req.body.name,
+      playlistCover: req?.files?.playlistCover[0],
+    };
 
-    const response = await playlistHelper.postCreatePlaylist(req.body);
+    validationHelper.playlistRequestValidation(validateData);
+
+    const objectData = {
+      ...req.body,
+      playlistCover: req?.files?.playlistCover[0],
+    };
+
+    const response = await playlistHelper.postCreatePlaylist(objectData);
 
     res
       .status(201)
@@ -138,7 +149,12 @@ const removeSongFromPlaylist = async (req, res) => {
 
 Router.get("/", playlistList);
 Router.get("/detail/:id", playlistDetail);
-Router.post("/create", userMiddleware.tokenValidation, createPlaylist);
+Router.post(
+  "/create",
+  uploadMedia.fields([{ name: "playlistCover", maxCount: 1 }]),
+  userMiddleware.tokenValidation,
+  createPlaylist
+);
 Router.patch("/update/:id", userMiddleware.tokenValidation, updatePlaylist);
 Router.delete("/remove/:id", userMiddleware.tokenValidation, removePlaylist);
 Router.post("/add-song/:id", userMiddleware.tokenValidation, addSongToPlaylist);

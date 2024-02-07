@@ -100,5 +100,42 @@
         }
     }
 
+    .playlist_container{
+        margin-top: 3rem;
+
+        .playlist_text{
+            @include directionX;
+
+            h5{
+                @include font(20px, $font-weight-regular, $text-color-secondary);
+                margin-bottom: .5rem;
+            }
     
+            .playlist_button {
+                @include font(12px, $font-weight-regular, $text-color-secondary);
+                margin-left: auto;
+            }
+        }
+
+        .playlist_list{
+            @include directionX;
+
+            .playlist_item{
+                margin-right: 2rem;
+                max-width: 100%;
+
+                .playlist_item_image{
+                    border-radius: 10px;
+                    height: 150px;
+                    width: 150px;
+                }
+
+                p {
+                    margin-top: .3rem;
+                    @include font(16px, $font-weight-regular, $text-color-secondary);
+                    text-align: center;
+                }
+            }
+        }
+    }
 }

@@ -12,6 +12,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
+      playlistCover: {
+        type: Sequelize.STRING,
+      },
       songs: {
         type: Sequelize.ARRAY(Sequelize.INTEGER),
         allowNull: true,

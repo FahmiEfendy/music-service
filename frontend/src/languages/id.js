@@ -27,4 +27,9 @@ export default {
   profile_back: 'Kembali',
   profile_proceed: 'Perbarui Profil',
   profile_picture_label: 'Foto Profil',
+
+  home_button: 'Tambahkan Musikmu',
+  home_button_secondary: 'Selengkapnya',
+  home_artist_popular: 'Artis Populer',
+  home_playlist_popular: 'Playlist Populer',
 };
