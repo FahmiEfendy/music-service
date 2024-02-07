@@ -1,0 +1,75 @@
+@import "../../styles/base.scss";
+
+.player_container{
+    position: sticky;
+    bottom: 0;
+    padding: 1rem;
+    background-color: $background-color-container;
+    border-radius: 10px 10px 0px 0px;
+
+    .player_container_inner{
+        @include directionX;
+
+        .song_info{
+            @include directionX;
+            align-items: center;
+            width:20%;
+    
+            .song_info_text{
+                margin-left: .5rem;
+
+                .cover{
+                }
+
+                p:nth-of-type(1){
+                    @include font(18px, $font-weight-medium, $text-color-secondary);
+                }
+                
+                p:nth-of-type(2){
+                    @include font(14px, $font-weight-regular, $text-color-secondary);
+                }
+            }
+        }
+
+        .indicator{
+            @include directionY;
+            margin: 0 auto;
+            width:60%;
+            align-items: center;
+
+            .play_btn{
+                margin-top: auto;
+
+                .toggler{
+                    font-size: 100rem !important;
+                }
+            }
+
+            .bar{
+                @include directionX;
+                align-items: center;
+                
+               p{
+                margin: 0;
+                @include font(14px, $font-weight-regular, $text-color-secondary);
+               }
+                
+                input {
+                    min-width: 400px;
+                    margin: 0 .5rem;
+                }
+            }           
+        }
+
+        .volume{
+            @include directionX;
+            margin: auto;
+            width:20%;
+
+            input {
+                margin-left: .5rem;
+                width: 100%;
+            }
+        }
+    }
+}

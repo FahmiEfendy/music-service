@@ -38,14 +38,14 @@ const createSong = async (req, res) => {
     const validateData = {
       title: req.body.title,
       genre: req.body.genre,
-      song: req.files.song[0],
-      albumCover: req.files.song[0],
+      song: req?.files?.song[0],
+      songCover: req?.files?.songCover[0],
     };
 
-    objectData = {
+    const objectData = {
       ...req.body,
-      song: { ...req.files.song[0] },
-      albumCover: { ...req.files.albumCover[0] },
+      song: req?.files?.song[0],
+      songCover: req?.files?.songCover[0],
     };
 
     validationHelper.songRequestValidation(validateData);
@@ -56,8 +56,6 @@ const createSong = async (req, res) => {
       .status(201)
       .send({ message: "Successfully Create New Song", data: response });
   } catch (err) {
-    fs.unlinkSync(req.files.song[0].path);
-    fs.unlinkSync(req.files.albumCover[0].path);
     res.status(500).send({ message: err.message });
   }
 };
@@ -118,7 +116,7 @@ Router.post(
   "/create",
   uploadMedia.fields([
     { name: "song", maxCount: 1 },
-    { name: "albumCover", maxCount: 1 },
+    { name: "songCover", maxCount: 1 },
   ]),
   userMiddleware.tokenValidation,
   createSong

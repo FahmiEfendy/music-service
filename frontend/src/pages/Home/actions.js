@@ -2,6 +2,9 @@ import {
   GET_PLAYLIST_LIST_FAILED,
   GET_PLAYLIST_LIST_REQUEST,
   GET_PLAYLIST_LIST_SUCCESS,
+  GET_SONG_LIST_FAILED,
+  GET_SONG_LIST_REQUEST,
+  GET_SONG_LIST_SUCCESS,
   GET_USER_LIST_FAILED,
   GET_USER_LIST_REQUEST,
   GET_USER_LIST_SUCCESS,
@@ -36,5 +39,21 @@ export const getPlaylistListSuccess = (data) => ({
 
 export const getPlaylistListFailed = (error) => ({
   type: GET_PLAYLIST_LIST_FAILED,
+  error,
+});
+
+// GET Song List
+export const getSongListRequest = (payload) => ({
+  type: GET_SONG_LIST_REQUEST,
+  payload,
+});
+
+export const getSongListSuccess = (data) => ({
+  type: GET_SONG_LIST_SUCCESS,
+  data,
+});
+
+export const getSongListFailed = (error) => ({
+  type: GET_SONG_LIST_FAILED,
   error,
 });

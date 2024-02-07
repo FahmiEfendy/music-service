@@ -4,6 +4,7 @@ const Boom = require("boom");
 
 const db = require("../../models");
 const generalHelper = require("./generalHelper");
+const { uploadToCloudinary } = require("../../utils/cloudinary");
 
 const fileName = "server/helpers/songHelper.js";
 
@@ -46,7 +47,7 @@ const getSongDetail = async (objectData) => {
 };
 
 const postCreateSong = async (objectData) => {
-  const { id, username, title, genre, song, albumCover } = objectData;
+  const { id, username, title, genre, song, songCover } = objectData;
 
   try {
     const selectedArtist = await db.User.findOne({
@@ -69,6 +70,13 @@ const postCreateSong = async (objectData) => {
 
     const songList = await getSongList();
 
+    const imageResult = await uploadToCloudinary(
+      songCover,
+      "image",
+      "image/songCover"
+    );
+    const songResult = await uploadToCloudinary(song, "video", "song");
+
     const newData = db.Song.build({
       id: `song-${songList.length + 1}`,
       singer: selectedArtist.fullname,
@@ -76,9 +84,10 @@ const postCreateSong = async (objectData) => {
       genre,
       originalName: song.originalname,
       mimeType: song.mimetype,
-      size: song.size,
-      path: song.path,
-      albumCoverPath: albumCover.path,
+      size: songResult.bytes,
+      songUrl: songResult.url,
+      songDuration: songResult.duration,
+      songCoverUrl: imageResult.url,
       user_id: selectedArtist.id,
     });
 

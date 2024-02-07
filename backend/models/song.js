@@ -26,8 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       originalName: DataTypes.STRING,
       mimeType: DataTypes.STRING,
       size: DataTypes.NUMBER,
-      path: DataTypes.STRING,
-      albumCoverPath: DataTypes.STRING,
+      songUrl: DataTypes.STRING,
+      songDuration: DataTypes.STRING,
+      songCoverUrl: DataTypes.STRING,
     },
     {
       sequelize,

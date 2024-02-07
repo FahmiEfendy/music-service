@@ -24,7 +24,7 @@ const songRequestValidation = (data, isUpdate = false) => {
       ? Joi.string().optional().description("Genre, i.e. Hard Rock")
       : Joi.string().required().description("Genre, i.e. Hard Rock"),
     song: !isUpdate && Joi.object().required().description("Song's file"),
-    albumCover:
+    songCover:
       !isUpdate &&
       Joi.object().required().description("Song's album cover image"),
   });

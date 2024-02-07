@@ -27,10 +27,13 @@ module.exports = {
       size: {
         type: Sequelize.NUMBER,
       },
-      path: {
+      songUrl: {
         type: Sequelize.STRING,
       },
-      albumCoverPath: {
+      songDuration: {
+        type: Sequelize.STRING,
+      },
+      songCoverUrl: {
         type: Sequelize.STRING,
       },
       user_id: {

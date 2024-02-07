@@ -13,6 +13,9 @@ const urls = {
   updateProfile: '/user/update-profile',
 
   playlistList: '/playlist',
+
+  songList: '/song',
+  songDetail: '/song/detail',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -48,3 +51,5 @@ export const patchUpdateProfile = (data) => {
   return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
 };
 export const getplaylistList = () => callAPI(urls.playlistList, 'GET');
+export const getSongList = () => callAPI(urls.songList, 'GET');
+export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');

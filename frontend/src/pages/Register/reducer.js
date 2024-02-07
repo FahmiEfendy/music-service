@@ -9,7 +9,7 @@ export const initialState = {
   },
 };
 
-export const storedKey = ['register'];
+export const storedKey = [''];
 
 const registerReducer = (state = initialState, action) =>
   produce(state, (draft) => {

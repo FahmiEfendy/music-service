@@ -6,17 +6,21 @@ import { createStructuredSelector } from 'reselect';
 import { selectLocale, selectTheme } from '@containers/App/selectors';
 
 import Navbar from '@components/Navbar';
+import MusicPlayer from '@components/MusicPlayer';
+import { selectSongDetail } from '@components/MusicPlayer/selectors';
 
-const MainLayout = ({ children, locale, theme, intl: { formatMessage } }) => (
+const MainLayout = ({ children, locale, theme, intl: { formatMessage }, songDetail }) => (
   <div>
     <Navbar title={formatMessage({ id: 'app_title_header' })} locale={locale} theme={theme} />
     {children}
+    {songDetail?.data.length !== 0 && <MusicPlayer />}
   </div>
 );
 
 const mapStateToProps = createStructuredSelector({
   locale: selectLocale,
   theme: selectTheme,
+  songDetail: selectSongDetail,
 });
 
 MainLayout.propTypes = {
@@ -24,6 +28,7 @@ MainLayout.propTypes = {
   locale: PropTypes.string,
   theme: PropTypes.string,
   intl: PropTypes.object,
+  songDetail: PropTypes.object,
 };
 
 export default injectIntl(connect(mapStateToProps)(MainLayout));

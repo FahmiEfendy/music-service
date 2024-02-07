@@ -32,4 +32,5 @@ export default {
   home_button_secondary: 'Selengkapnya',
   home_artist_popular: 'Artis Populer',
   home_playlist_popular: 'Playlist Populer',
+  home_song_popular: 'Lagu Populer',
 };

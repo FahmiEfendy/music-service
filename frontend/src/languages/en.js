@@ -32,4 +32,5 @@ export default {
   home_button_secondary: 'See More',
   home_artist_popular: 'Popular Artist',
   home_playlist_popular: 'Popular Playlist',
+  home_song_popular: 'Popular Song',
 };

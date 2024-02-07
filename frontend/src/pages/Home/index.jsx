@@ -3,17 +3,21 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import { Avatar, Box, Button, Container, Typography } from '@mui/material';
 
 import tokenDecoder from '@utils/tokenDecoder';
 import stringLimitter from '@utils/stringLimitter';
 import { selectToken } from '@containers/Client/selectors';
-import { selectPlaylistList, selectUserList } from './selectors';
-import { getPlaylistListRequest, getUserListRequest } from './actions';
+import { getSongDetailRequest } from '@components/MusicPlayer/actions';
+import { selectPlaylistList, selectSongList, selectUserList } from './selectors';
+import { getPlaylistListRequest, getSongListRequest, getUserListRequest } from './actions';
 
 import classes from './style.module.scss';
 
-const Home = ({ token, userList, playlistList }) => {
+const Home = ({ token, userList, playlistList, songList }) => {
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState('');
@@ -21,6 +25,7 @@ const Home = ({ token, userList, playlistList }) => {
   useEffect(() => {
     dispatch(getUserListRequest());
     dispatch(getPlaylistListRequest());
+    dispatch(getSongListRequest());
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,6 +34,10 @@ const Home = ({ token, userList, playlistList }) => {
     const data = tokenDecoder(token);
     setUserData(data);
   }, [token]);
+
+  const playSongHandler = (id) => {
+    dispatch(getSongDetailRequest(id));
+  };
 
   return (
     <Container className={classes.home_container}>
@@ -50,20 +59,20 @@ const Home = ({ token, userList, playlistList }) => {
       </Box>
 
       {/* Popular Artist */}
-      <Box className={classes.artist_container}>
-        <Box className={classes.artist_text}>
+      <Box className={classes.list_container}>
+        <Box className={classes.list_header}>
           <Typography variant="h5">
             <FormattedMessage id="home_artist_popular" />
           </Typography>
-          <Button className={classes.artist_button}>
+          <Button className={classes.more_btn}>
             <FormattedMessage id="home_button_secondary" />
           </Button>
         </Box>
         {userList?.data && (
-          <Box className={classes.artist_list}>
+          <Box className={classes.item_wrapper}>
             {userList?.data.map((data) => (
-              <Box className={classes.artist_item} key={data.id}>
-                <Avatar className={classes.artist_item_image} src={data.profilePicture} />
+              <Box className={classes.item_wrapper_inner} key={data.id}>
+                <Avatar className={classes.item_image} src={data.profilePicture} />
                 <Typography variant="body1">{data.fullname}</Typography>
               </Box>
             ))}
@@ -72,20 +81,50 @@ const Home = ({ token, userList, playlistList }) => {
       </Box>
 
       {/* Popular Playlist */}
-      <Box className={classes.playlist_container}>
-        <Box className={classes.playlist_text}>
+      <Box className={classes.list_container}>
+        <Box className={classes.list_header}>
           <Typography variant="h5">
             <FormattedMessage id="home_playlist_popular" />
           </Typography>
-          <Button className={classes.playlist_button}>
+          <Button className={classes.more_btn}>
             <FormattedMessage id="home_button_secondary" />
           </Button>
         </Box>
-        <Box className={classes.playlist_list}>
+        <Box className={classes.item_wrapper}>
           {playlistList?.data.map((data) => (
-            <Box className={classes.playlist_item} key={data.id}>
-              <Avatar className={classes.playlist_item_image} src={data.playlistCover} />
+            <Box className={classes.item_wrapper_inner} key={data.id}>
+              <Avatar className={classes.item_image} src={data.playlistCover}>
+                <LibraryMusicIcon />
+              </Avatar>
               <Typography variant="body1">{stringLimitter(data.name)}</Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+
+      {/* Popular Song */}
+      <Box className={classes.list_container}>
+        <Box className={classes.list_header}>
+          <Typography variant="h5">
+            <FormattedMessage id="home_song_popular" />
+          </Typography>
+          <Button className={classes.more_btn}>
+            <FormattedMessage id="home_button_secondary" />
+          </Button>
+        </Box>
+        <Box className={classes.item_wrapper}>
+          {songList?.data.map((data) => (
+            <Box
+              className={classes.item_wrapper_inner}
+              key={data.id}
+              onClick={() => {
+                playSongHandler(data.id);
+              }}
+            >
+              <Avatar className={classes.item_image} src={data?.songCoverUrl}>
+                <AudiotrackIcon />
+              </Avatar>
+              <Typography variant="body1">{`${data?.singer} - ${data?.title}`}</Typography>
             </Box>
           ))}
         </Box>
@@ -98,12 +137,14 @@ Home.propTypes = {
   token: PropTypes.string,
   userList: PropTypes.object,
   playlistList: PropTypes.object,
+  songList: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
   userList: selectUserList,
   playlistList: selectPlaylistList,
+  songList: selectSongList,
 });
 
 export default connect(mapStateToProps)(Home);
