@@ -59,6 +59,11 @@
       }
     }
 
+    .toolbar_lang{
+      @extend .toolbar;
+      margin: 0 1rem 0 auto;
+    }
+
     .login_btn{
       text-transform: capitalize;
       padding: .2rem 1rem;

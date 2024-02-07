@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -60,21 +61,29 @@ const Register = ({ register }) => {
       <Container className={classes.register_container_inner}>
         <Box className={classes.wrapper_left} />
         <Box className={classes.wrapper_right}>
-          <Typography variant="h5">Register</Typography>
+          <Typography variant="h5">
+            <FormattedMessage id="register_header" />
+          </Typography>
           <FormControl className={classes.form}>
             <FormLabel className={classes.form_label}>Username</FormLabel>
             <TextField type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </FormControl>
           <FormControl className={classes.form}>
-            <FormLabel className={classes.form_label}>Full Name</FormLabel>
+            <FormLabel className={classes.form_label}>
+              <FormattedMessage id="profile_fullname" />
+            </FormLabel>
             <TextField type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} />
           </FormControl>
           <FormControl className={classes.form}>
-            <FormLabel className={classes.form_label}>Password</FormLabel>
+            <FormLabel className={classes.form_label}>
+              <FormattedMessage id="home_input_password" />
+            </FormLabel>
             <TextField type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
           <FormControl className={classes.form}>
-            <FormLabel className={classes.form_label}>Confirm Password</FormLabel>
+            <FormLabel className={classes.form_label}>
+              <FormattedMessage id="register_confirm_password" />
+            </FormLabel>
             <TextField type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
           </FormControl>
           <FormControl className={classes.form}>
@@ -86,11 +95,14 @@ const Register = ({ register }) => {
           </FormControl>
           <Box className={classes.form}>
             <Button variant="contained" onClick={registerHandler}>
-              Register
+              <FormattedMessage id="register_header" />
             </Button>
           </Box>
           <Typography variant="body1" className={classes.login}>
-            Already have an account? <a href="/login">Login instead</a>
+            <FormattedMessage id="register_login_label_1" />
+            <a href="/login">
+              <FormattedMessage id="register_login_label_2" />
+            </a>
           </Typography>
         </Box>
       </Container>

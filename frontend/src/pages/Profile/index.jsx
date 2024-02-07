@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
@@ -48,13 +49,17 @@ const Profile = ({ userDetail }) => {
     userDetail?.data && (
       <Container className={classes.container} maxWidth="md">
         <Container className={classes.container_inner}>
-          <Typography variant="h5">Profile</Typography>
+          <Typography variant="h5">
+            <FormattedMessage id="profile_header" />
+          </Typography>
           <FormControl className={classes.input_wrapper}>
             <FormLabel className={classes.input_label}>Username</FormLabel>
             <TextField type="text" value={userDetail?.data?.username || ''} disabled />
           </FormControl>
           <FormControl className={classes.input_wrapper}>
-            <FormLabel className={classes.input_label}>Full Name</FormLabel>
+            <FormLabel className={classes.input_label}>
+              <FormattedMessage id="profile_fullname" />
+            </FormLabel>
             <TextField type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} />
           </FormControl>
           <FormControl className={classes.input_wrapper}>
@@ -77,7 +82,9 @@ const Profile = ({ userDetail }) => {
             </RadioGroup>
           </FormControl>
           <FormControl className={classes.input_wrapper}>
-            <FormLabel className={classes.input_label}>Profile Picture</FormLabel>
+            <FormLabel className={classes.input_label}>
+              <FormattedMessage id="profile_picture_label" />
+            </FormLabel>
             {userDetail?.data?.profilePicture || file ? (
               <>
                 <img
@@ -99,7 +106,9 @@ const Profile = ({ userDetail }) => {
               <Box className={classes.input_profile_picture}>
                 <FormLabel htmlFor="fileInput">
                   <UploadIcon />
-                  <Typography variant="body1">Upload Picture</Typography>
+                  <Typography variant="body1">
+                    <FormattedMessage id="profile_upload" />
+                  </Typography>
                 </FormLabel>
                 <input type="file" id="fileInput" ref={fileInputRef} onChange={(e) => setFile(e.target.files[0])} />
               </Box>
@@ -107,10 +116,10 @@ const Profile = ({ userDetail }) => {
           </FormControl>
           <Box className={classes.button_wrapper}>
             <Button type="button" variant="outlined" onClick={() => navigate(-1)}>
-              Go Back
+              <FormattedMessage id="profile_back" />
             </Button>
             <Button type="button" variant="contained" onClick={updateProfileHandler}>
-              Update Profile
+              <FormattedMessage id="profile_proceed" />
             </Button>
           </Box>
         </Container>
