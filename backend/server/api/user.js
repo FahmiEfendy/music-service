@@ -2,6 +2,7 @@ const Router = require("express").Router();
 
 const userHelper = require("../helpers/userHelper");
 const generalHelper = require("../helpers/generalHelper");
+const uploadMedia = require("../middlewares/uploadMedia");
 const validationHelper = require("../helpers/validationHelper");
 const userMiddleware = require("../middlewares/userMiddleware");
 const { decryptTextPayload } = require("../../utils/decryptPayload");
@@ -94,6 +95,32 @@ const userDetail = async (req, res) => {
   }
 };
 
+const updateProfile = async (req, res) => {
+  try {
+    const validateData = {
+      fullname: req.body.fullname,
+      profilePicture: req?.files?.profilePicture[0],
+    };
+
+    validationHelper.updateProfileValidation(validateData);
+
+    const objectData = {
+      id: req.body.id,
+      username: req.body.username,
+      fullname: req.body.fullname,
+      profilePicture: req?.files?.profilePicture[0],
+    };
+
+    const response = await userHelper.patchUpdateProfile(objectData);
+
+    res
+      .status(200)
+      .send({ message: "Successfully Update User's Profile", data: response });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const changePassword = async (req, res) => {
   try {
     const validateData = {
@@ -108,7 +135,7 @@ const changePassword = async (req, res) => {
 
     res
       .status(200)
-      .send({ message: "Successfully Update a User", data: response });
+      .send({ message: "Successfully Change User's Password", data: response });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -163,6 +190,12 @@ Router.post("/register", register);
 Router.post("/login", login);
 Router.get("/", userList);
 Router.get("/detail", userMiddleware.tokenValidation, userDetail);
+Router.patch(
+  "/update-profile",
+  uploadMedia.fields([{ name: "profilePicture", maxCount: 1 }]),
+  userMiddleware.tokenValidation,
+  updateProfile
+);
 Router.patch(
   "/change-password",
   userMiddleware.tokenValidation,

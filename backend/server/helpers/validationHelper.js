@@ -106,6 +106,21 @@ const loginValidation = (data) => {
   }
 };
 
+const updateProfileValidation = (data) => {
+  const schema = Joi.object({
+    fullname: Joi.string()
+      .optional()
+      .description("User's fullname, i.e. John Doe"),
+    profilePicture: Joi.object()
+      .optional()
+      .description("User's profile pictture"),
+  });
+
+  if (schema.validate(data).error) {
+    throw Boom.badRequest(schema.validate(data).error);
+  }
+};
+
 const changePasswordValidation = (data) => {
   const schema = Joi.object({
     oldPassword: Joi.string()
@@ -170,6 +185,7 @@ module.exports = {
   updatePlaylistValidation,
   registerValidation,
   loginValidation,
+  updateProfileValidation,
   changePasswordValidation,
   forgotPasswordValidation,
   resetPasswordValidation,

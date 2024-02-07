@@ -2,8 +2,8 @@ const fs = require("fs");
 const Router = require("express").Router();
 
 const songHelper = require("../helpers/songHelper");
+const uploadMedia = require("../middlewares/uploadMedia");
 const validationHelper = require("../helpers/validationHelper");
-const upload = require("../middlewares/songMiddleware");
 const userMiddleware = require("../middlewares/userMiddleware");
 
 const songList = async (req, res) => {
@@ -116,7 +116,7 @@ Router.get("/", songList);
 Router.get("/detail/:id", songDetail);
 Router.post(
   "/create",
-  upload.fields([
+  uploadMedia.fields([
     { name: "song", maxCount: 1 },
     { name: "albumCover", maxCount: 1 },
   ]),

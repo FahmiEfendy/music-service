@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../../models");
 const generalHelper = require("./generalHelper");
+const { uploadToCloudinary } = require("../../utils/cloudinary");
 
 const salt = bcrypt.genSaltSync(10);
 const fileName = "server/helpers/userHelper.js";
@@ -124,7 +125,9 @@ const postLogin = async (objectData) => {
     const token = __generateToken({
       id: selectedUser.id,
       username: selectedUser.username,
+      fullname: selectedUser.fullname,
       role: selectedUser.role,
+      profilePicture: selectedUser?.profilePicture,
     });
 
     console.log([fileName, "POST Login", "INFO"]);
@@ -132,6 +135,42 @@ const postLogin = async (objectData) => {
     return Promise.resolve({ token });
   } catch (err) {
     console.log([fileName, "POST Login", "ERROR"], {
+      message: { info: `${err}` },
+    });
+
+    return Promise.reject(generalHelper.errorResponse(err));
+  }
+};
+
+const patchUpdateProfile = async (objectData) => {
+  const { id, username, fullname, profilePicture } = objectData;
+
+  try {
+    const selectedUser = await db.User.findOne({ id, username });
+
+    if (_.isEmpty(selectedUser)) {
+      throw Boom.badRequest(`User with username ${username} not found!`);
+    }
+
+    const imageResult = await uploadToCloudinary(
+      profilePicture,
+      "image",
+      "image/profilePicture"
+    );
+
+    selectedUser.fullname = fullname || selectedUser.fullname;
+    selectedUser.profilePicture =
+      imageResult.url || selectedUser.profilePicture;
+
+    await selectedUser.save({ fields: ["fullname", "profilePicture"] });
+
+    await selectedUser.reload();
+
+    console.log([fileName, "PATCH Update User Profile", "INFO"]);
+
+    return Promise.resolve([]);
+  } catch (err) {
+    console.log([fileName, "PATCH Update User Profile", "ERROR"], {
       message: { info: `${err}` },
     });
 
@@ -263,6 +302,7 @@ module.exports = {
   getUserDetail,
   postRegister,
   postLogin,
+  patchUpdateProfile,
   patchChangePassword,
   postForgotPassword,
   postResetPassword,
