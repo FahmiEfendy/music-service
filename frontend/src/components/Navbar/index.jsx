@@ -59,6 +59,7 @@ const Navbar = ({ title, token, isLogin }) => {
           <>
             <div className={classes.toolbar}>
               <div className={classes.toggle} onClick={handleClick}>
+                {/* TODO: Cannot Get User Data Because Token */}
                 <Avatar className={classes.avatar} src={userData.profilePicture} />
                 <div className={classes.lang}>{userData.fullname}</div>
                 <ExpandMoreIcon />

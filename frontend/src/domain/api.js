@@ -8,6 +8,8 @@ const urls = {
 
   register: '/user/register',
   login: '/user/login',
+  userDetail: '/user/detail',
+  updateProfile: '/user/update-profile',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -36,3 +38,8 @@ export const postRegister = (data) => {
   callAPI(urls.register, 'POST', {}, {}, data);
 };
 export const postLogin = (data) => callAPI(urls.login, 'POST', {}, {}, data);
+export const getUserDetail = () => callAPI(urls.userDetail, 'GET');
+export const patchUpdateProfile = (data) => {
+  const header = { 'Content-Type': 'multipart/form-data' };
+  return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
+};

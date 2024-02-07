@@ -1,0 +1,90 @@
+@import "../../styles/base.scss";
+
+.container{
+    @include directionX;
+    height: 80vh;
+    align-items: center;
+
+    .container_inner{
+        @include directionY;
+        background-color: white;
+        padding: 1rem;
+
+        h5{
+            text-align: center;
+            margin-bottom: 1rem
+        }
+
+        .input_wrapper{
+            margin-top: 1rem;
+
+            .input_label{
+                @include font(14px, $font-weight-light, $text-color-secondary);
+                margin-bottom: .2rem
+            }
+
+            input {
+                @include font(16px, $font-weight-regular, $text-color-secondary);
+            }
+
+            .radio{
+                @include directionX;
+
+                .radio_label{
+                    span {
+                        @include font(16px, $font-weight-light, $text-color-secondary);
+                    }
+                }
+            }
+
+            .profile_picture{
+                border-radius: 10px;
+                width: 200px;
+                height: 200px
+            }
+
+            .change_btn{
+                margin-top: .5rem;
+                text-transform: capitalize;
+                align-self: self-start;
+                @include font(14px, $font-weight-light, "");
+            }
+
+            .input_profile_picture{
+                border-radius: 10px;
+                width: 200px;
+                height: 200px;
+                background-color: $background-color-gray;
+
+                label{
+                    @include directionY;
+                    align-items: center;
+                    justify-content: center;
+                    height:100%
+                }
+
+                p {
+                    @include font(20px, $font-weight-regular, $text-color-secondary);
+                    margin-top: .5rem
+                }
+
+                input {
+                    display: none
+                }
+            }
+        }
+
+        .button_wrapper{
+            @include directionX;
+
+            button {
+                text-transform: capitalize;
+            }
+            
+            button:nth-of-type(1){
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+        }
+    }
+}
