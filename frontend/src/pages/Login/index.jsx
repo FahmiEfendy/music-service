@@ -60,7 +60,7 @@ const Login = ({ login }) => {
             </Button>
           </Box>
           <Typography variant="body1" className={classes.login}>
-            Don&lsquo;t have an account? <a href="/login">Login instead</a>
+            Don&lsquo;t have an account? <a href="/register">Register instead</a>
           </Typography>
         </Box>
       </Container>

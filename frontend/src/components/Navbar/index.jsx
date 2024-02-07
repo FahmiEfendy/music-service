@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -8,18 +8,19 @@ import { createStructuredSelector } from 'reselect';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 
-import { selectLogin } from '@pages/Login/selectors';
+import tokenDecoder from '@utils/tokenDecoder';
 import { setLogin, setToken } from '@containers/Client/actions';
-import { selectLogin as isSelectLogin } from '@containers/Client/selectors';
+import { selectLogin as isSelectLogin, selectToken } from '@containers/Client/selectors';
 
 import classes from './style.module.scss';
-import ProfilePicture from '../../assets/profile.jpg';
 
-const Navbar = ({ title, login, isLogin }) => {
+const Navbar = ({ title, token, isLogin }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [userData, setUserData] = useState('');
   const [menuPosition, setMenuPosition] = useState(null);
+
   const open = Boolean(menuPosition);
 
   const handleClick = (event) => {
@@ -39,6 +40,13 @@ const Navbar = ({ title, login, isLogin }) => {
     dispatch(setToken(null));
   };
 
+  useEffect(() => {
+    if (!token) return;
+
+    const data = tokenDecoder(token);
+    setUserData(data);
+  }, [token]);
+
   return (
     <div className={classes.headerWrapper} data-testid="navbar">
       <div className={classes.contentWrapper}>
@@ -50,19 +58,16 @@ const Navbar = ({ title, login, isLogin }) => {
         {isLogin ? (
           <>
             <div className={classes.toolbar}>
-              {/* Profile Button */}
               <div className={classes.toggle} onClick={handleClick}>
-                {/* GET Profile Picture */}
-                <Avatar className={classes.avatar} src={ProfilePicture} />
-                <div className={classes.lang}>{login.data.fullname}</div>
+                <Avatar className={classes.avatar} src={userData.profilePicture} />
+                <div className={classes.lang}>{userData.fullname}</div>
                 <ExpandMoreIcon />
               </div>
             </div>
-            {/* Profile Dropdown */}
             <Menu open={open} anchorEl={menuPosition} onClose={handleClose} className={classes.menu_container}>
               <MenuItem
                 onClick={() => {
-                  navigate(`/user/detail/${login.data.id}`);
+                  navigate(`/user/detail/${userData?.id}`);
                 }}
               >
                 <div className={classes.menu}>
@@ -92,12 +97,12 @@ const Navbar = ({ title, login, isLogin }) => {
 
 Navbar.propTypes = {
   title: PropTypes.string,
-  login: PropTypes.object,
+  token: PropTypes.any,
   isLogin: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  login: selectLogin,
+  token: selectToken,
   isLogin: isSelectLogin,
 });
 

@@ -10,7 +10,7 @@ function* doPostRegister(action) {
   try {
     const response = yield call(postRegister, action.payload);
 
-    yield put(postRegisterSuccess(response.data));
+    yield put(postRegisterSuccess(response));
   } catch (err) {
     yield put(postRegisterFailed(err.message));
   }
