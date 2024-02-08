@@ -16,6 +16,7 @@ const urls = {
 
   songList: '/song',
   songDetail: '/song/detail',
+  createSong: '/song/create',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -53,3 +54,7 @@ export const patchUpdateProfile = (data) => {
 export const getplaylistList = () => callAPI(urls.playlistList, 'GET');
 export const getSongList = () => callAPI(urls.songList, 'GET');
 export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');
+export const postCreateSong = (data) => {
+  const header = { 'Content-Type': 'multipart/form-data' };
+  return callAPI(urls.createSong, 'POST', header, {}, data);
+};

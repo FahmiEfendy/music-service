@@ -5,6 +5,7 @@ import NotFound from '@pages/NotFound';
 import Register from '@pages/Register';
 import Login from '@pages/Login';
 import Profile from '@pages/Profile';
+import CreateSong from '@pages/CreateSong';
 
 const routes = [
   {
@@ -35,6 +36,19 @@ const routes = [
         name: 'User Detail',
         protected: true,
         component: Profile,
+        layout: MainLayout,
+      },
+    ],
+  },
+  {
+    path: '/song',
+    name: 'Song',
+    subRoutes: [
+      {
+        path: '/create',
+        name: 'Create Song',
+        protected: true,
+        component: CreateSong,
         layout: MainLayout,
       },
     ],

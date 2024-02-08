@@ -87,7 +87,7 @@
                 cursor: pointer;
 
                 .item_image{
-                    border-radius: 50%;
+                    border-radius: 10%;
                     height: 150px;
                     width: 150px;
 
@@ -95,6 +95,11 @@
                         width: 90px;
                         height: 90px;
                     }
+                }
+
+                .item_image_rounded{
+                    @extend .item_image;
+                    border-radius: 50%
                 }
 
                 p {

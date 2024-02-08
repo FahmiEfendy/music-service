@@ -33,4 +33,12 @@ export default {
   home_artist_popular: 'Popular Artist',
   home_playlist_popular: 'Popular Playlist',
   home_song_popular: 'Popular Song',
+
+  create_song_title: 'Title',
+  create_song_genre: 'Genre',
+  create_song_file1: 'Song',
+  create_song_file2: 'Song Cover',
+  create_song_cancel: 'Cancel',
+  create_song_proceed: 'Create',
+  create_song_upload_cover: 'Upload Song Cover',
 };

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -19,6 +20,7 @@ import classes from './style.module.scss';
 
 const Home = ({ token, userList, playlistList, songList }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState('');
 
@@ -46,7 +48,7 @@ const Home = ({ token, userList, playlistList, songList }) => {
           <Typography variant="h5">Unleash the Beats: Your Soundtrack, Your Style</Typography>
           <Typography variant="body1">Where Rhythm Meets Innovation - Hip-Hop Your Way</Typography>
           {userData?.role === 'artist' ? (
-            <Button>
+            <Button onClick={() => navigate('/song/create')}>
               <FormattedMessage id="home_button" />
             </Button>
           ) : (
@@ -72,7 +74,7 @@ const Home = ({ token, userList, playlistList, songList }) => {
           <Box className={classes.item_wrapper}>
             {userList?.data.map((data) => (
               <Box className={classes.item_wrapper_inner} key={data.id}>
-                <Avatar className={classes.item_image} src={data.profilePicture} />
+                <Avatar className={classes.item_image_rounded} src={data.profilePicture} />
                 <Typography variant="body1">{data.fullname}</Typography>
               </Box>
             ))}

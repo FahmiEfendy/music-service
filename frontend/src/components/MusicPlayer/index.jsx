@@ -51,7 +51,7 @@ const MusicPlayer = ({ songDetail }) => {
     <Box className={classes.player_container}>
       <Container className={classes.player_container_inner}>
         <Box className={classes.song_info}>
-          <Avatar src={songDetail?.data?.songCoverPath} className={classes.cover}>
+          <Avatar src={songDetail?.data?.songCoverUrl} className={classes.cover}>
             <AudiotrackIcon />
           </Avatar>
           <Box className={classes.song_info_text}>

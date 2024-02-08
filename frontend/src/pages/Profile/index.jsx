@@ -29,8 +29,8 @@ const Profile = ({ userDetail }) => {
 
   const fileInputRef = useRef(null);
 
-  const [fullname, setFullname] = useState(userDetail?.data?.fullname || '');
-  const [file, setFile] = useState(userDetail?.data?.profilePicture || '');
+  const [fullname, setFullname] = useState('');
+  const [file, setFile] = useState('');
 
   const updateProfileHandler = () => {
     const formData = new FormData();
@@ -45,8 +45,15 @@ const Profile = ({ userDetail }) => {
     dispatch(getUserDetailRequest());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (userDetail?.data?.length !== 0) {
+      setFile(userDetail?.data?.profilePicture);
+      setFullname(userDetail?.data?.fullname);
+    }
+  }, [userDetail?.data]);
+
   return (
-    userDetail?.data && (
+    userDetail?.data?.length !== 0 && (
       <Container className={classes.container} maxWidth="md">
         <Container className={classes.container_inner}>
           <Typography variant="h5">

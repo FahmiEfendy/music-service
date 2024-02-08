@@ -33,4 +33,12 @@ export default {
   home_artist_popular: 'Artis Populer',
   home_playlist_popular: 'Playlist Populer',
   home_song_popular: 'Lagu Populer',
+
+  create_song_title: 'Judul',
+  create_song_genre: 'Aliran',
+  create_song_file1: 'Lagu',
+  create_song_file2: 'Sampul Lagu',
+  create_song_cancel: 'Kembali',
+  create_song_proceed: 'Tambahkan',
+  create_song_upload_cover: 'Masukkan Sampul Lagu',
 };
