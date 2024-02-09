@@ -12,6 +12,7 @@ export default {
   nav_profile: 'Profile',
   nav_logout: 'Logout',
   nav_my_song: 'My Song',
+  nav_my_playlist: 'My Playlist',
 
   register_header: 'Register',
   register_confirm_password: 'Confirm Password',
@@ -36,6 +37,10 @@ export default {
   home_artist_popular: 'Popular Artist',
   home_playlist_popular: 'Popular Playlist',
   home_song_popular: 'Popular Song',
+
+  create_playlist_header: 'Create Playlist',
+  create_playlist_file_label: 'Playlist Cover',
+  create_playlist_upload_cover: 'Upload Playlist Cover',
 
   create_song_title: 'Title',
   create_song_genre: 'Genre',

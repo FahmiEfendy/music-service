@@ -12,6 +12,7 @@ export default {
   nav_profile: 'Profil',
   nav_logout: 'Keluar',
   nav_my_song: 'Lagu Saya',
+  nav_my_playlist: 'Playlist Saya',
 
   register_header: 'Daftar',
   register_confirm_password: 'Konfirmasi Password',
@@ -36,6 +37,10 @@ export default {
   home_artist_popular: 'Artis Populer',
   home_playlist_popular: 'Playlist Populer',
   home_song_popular: 'Lagu Populer',
+
+  create_playlist_header: 'Buat Playlist',
+  create_playlist_file_label: 'Sampul Playlist',
+  create_playlist_upload_cover: 'Unggah Sampul Playlist',
 
   create_song_title: 'Judul',
   create_song_genre: 'Aliran',

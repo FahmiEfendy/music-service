@@ -13,6 +13,7 @@ const urls = {
   updateProfile: '/user/update-profile',
 
   playlistList: '/playlist',
+  playlistDetail: '/playlist/detail',
   createPlaylist: '/playlist/create',
 
   songList: '/song',
@@ -53,7 +54,8 @@ export const patchUpdateProfile = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
 };
-export const getplaylistList = () => callAPI(urls.playlistList, 'GET');
+export const getplaylistList = (params) => callAPI(urls.playlistList, 'GET', params, {});
+export const getPlaylistDetail = (id) => callAPI(`${urls.playlistDetail}/${id}`, 'GET');
 export const postCreatePlaylist = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createPlaylist, 'POST', header, {}, data);

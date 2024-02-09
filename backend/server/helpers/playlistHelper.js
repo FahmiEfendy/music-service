@@ -7,9 +7,11 @@ const { uploadToCloudinary } = require("../../utils/cloudinary");
 
 const fileName = "server/helpers/playlistHelper.js";
 
-const getPlaylistList = async () => {
+const getPlaylistList = async (query) => {
   try {
-    const data = await db.Playlist.findAll();
+    const data = await db.Playlist.findAll({
+      where: query?.id ? { user_id: query.id } : {},
+    });
 
     console.log([fileName, "GET All Playlist", "INFO"]);
 
@@ -32,7 +34,7 @@ const getPlaylistDetail = async (objectData) => {
       include: {
         model: db.Song,
         as: "songs",
-        attributes: ["id", "title", "singer"],
+        attributes: ["id", "title", "singer", "genre", "songCoverUrl"],
         through: { attributes: [] },
       },
     });

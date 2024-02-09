@@ -30,7 +30,9 @@ const CreatePlaylist = () => {
   return (
     <Container>
       <Box className={classes.create_container}>
-        <Typography variant="h5">Create Song</Typography>
+        <Typography variant="h5">
+          <FormattedMessage id="create_playlist_header" />
+        </Typography>
         <FormControl className={classes.form}>
           <Box className={classes.input_list}>
             <FormLabel className={classes.input_label}>
@@ -43,7 +45,7 @@ const CreatePlaylist = () => {
           <Box className={classes.input_list}>
             <FormLabel className={classes.input_label}>
               <Typography variant="body1">
-                <FormattedMessage id="create_song_file2" />
+                <FormattedMessage id="create_playlist_file_label" />
               </Typography>
             </FormLabel>
             {playlistCover ? (
@@ -57,7 +59,7 @@ const CreatePlaylist = () => {
                 <FormLabel className={classes.input_label} htmlFor="songCoverInput">
                   <UploadIcon />
                   <Typography variant="body1">
-                    <FormattedMessage id="create_song_upload_cover" />
+                    <FormattedMessage id="create_playlist_upload_cover" />
                   </Typography>
                 </FormLabel>
                 <input

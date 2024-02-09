@@ -1,0 +1,47 @@
+@import "../../styles/base.scss";
+
+.container{
+    margin-top: 2rem;
+    background-color: $background-color-container;
+    border-radius: 10px;
+    padding: 3rem;
+
+    .list_container{
+        margin-top: 3rem;
+
+        .list_header{
+            h5{
+                @include font(30px, $font-weight-regular, $text-color-secondary);
+                margin-bottom: .5rem;
+                text-align: center
+            }
+        }
+
+        .item_wrapper{
+            @include directionX;
+
+            .item_wrapper_inner{
+                margin-right: 2rem;
+                cursor: pointer;
+
+                .item_image{
+                    border-radius: 10%;
+                    height: 150px;
+                    width: 150px;
+
+                    svg{
+                        width: 90px;
+                        height: 90px;
+                    }
+                }
+
+                p {
+                    margin-top: .3rem;
+                    @include font(16px, $font-weight-regular, $text-color-secondary);
+                    text-align: center;
+                    width: 8rem;
+                }
+            }
+        }
+    }
+}

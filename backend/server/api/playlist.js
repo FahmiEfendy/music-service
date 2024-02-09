@@ -7,7 +7,7 @@ const userMiddleware = require("../middlewares/userMiddleware");
 
 const playlistList = async (req, res) => {
   try {
-    const response = await playlistHelper.getPlaylistList();
+    const response = await playlistHelper.getPlaylistList(req.query);
 
     res
       .status(200)

@@ -1,0 +1,71 @@
+@import "../../styles/base.scss";
+
+.container{
+    margin-top: 2rem;
+    background-color: $background-color-container;
+    border-radius: 10px;
+    padding: 3rem;
+    
+    .playlist_wrapper{
+        @include directionX;
+        align-items: center;
+        margin-left: 1rem;
+    
+        .avatar{
+            width: 150px;
+            height: 150px
+        }
+    
+        h5{
+            margin-left: 1rem;
+        }
+    }
+    
+    .list{
+        @include directionY;
+        margin-top: 2rem;
+    
+        button {
+            @include font(16px, $font-weight-medium, "");
+            text-transform: capitalize;
+            padding: 0.2rem 1.2rem;
+            margin-left: auto
+        }
+    
+        .header{
+            @include font(14px, $font-weight-medium, $text-color-secondary);
+    
+        }
+    
+        h5 {
+            @include font(20px, $font-weight-medium, $text-color-secondary);
+            margin-left: 1rem
+        }
+    
+        .item{
+            @include directionX;
+            margin-top: .5rem;
+    
+            .song_cover{
+                width: 80px;
+                height: 80px;
+            }     
+    
+            .song_title{
+                @include font(22px, $font-weight-medium, $text-color-secondary);
+            }
+            
+            .song_singer{
+                @include font(16px, $font-weight-light, $text-color-secondary);
+            }
+    
+            .song_genre{
+                @include font(12px, $font-weight-light, $text-color-secondary);
+            }
+    
+            .action_wrapper{
+                margin-left: auto;
+            }
+        }
+    }
+}

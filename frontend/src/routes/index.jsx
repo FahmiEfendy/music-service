@@ -8,6 +8,8 @@ import Profile from '@pages/Profile';
 import CreateSong from '@pages/CreateSong';
 import SongList from '@pages/SongList';
 import CreatePlaylist from '@pages/CreatePlaylist';
+import PlaylistList from '@pages/PlaylistList';
+import PlaylistDetail from '@pages/PlaylistDetail';
 
 const routes = [
   {
@@ -66,7 +68,9 @@ const routes = [
     path: '/playlist',
     name: 'Playlist',
     subRoutes: [
-      { path: '/create/', name: 'Create Playlist', protected: 'true', component: CreatePlaylist, layout: MainLayout },
+      { path: '/create/', name: 'Create Playlist', protected: true, component: CreatePlaylist, layout: MainLayout },
+      { path: '/list/:id', name: 'My Playlist List', protected: true, component: PlaylistList, layout: MainLayout },
+      { path: '/detail/:id', name: 'Playlist Detail', protected: false, component: PlaylistDetail, layout: MainLayout },
     ],
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },
