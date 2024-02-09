@@ -42,6 +42,9 @@ export default {
   create_playlist_file_label: 'Playlist Cover',
   create_playlist_upload_cover: 'Upload Playlist Cover',
 
+  playlist_delete: 'Delete Playlist',
+  playlist_delete_sub: 'Are you sure want to delete this playlist?',
+
   create_song_title: 'Title',
   create_song_genre: 'Genre',
   create_song_file1: 'Song',

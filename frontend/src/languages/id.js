@@ -42,6 +42,9 @@ export default {
   create_playlist_file_label: 'Sampul Playlist',
   create_playlist_upload_cover: 'Unggah Sampul Playlist',
 
+  playlist_delete: 'Hapus Playlist',
+  playlist_delete_sub: 'Apakah kamu yakin ingin menghapus playlist ini?',
+
   create_song_title: 'Judul',
   create_song_genre: 'Aliran',
   create_song_file1: 'Lagu',

@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { connect, useDispatch } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { useNavigate, useParams } from 'react-router-dom';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import { Avatar, Box, Container, Grid, IconButton, List, ListItem, Typography } from '@mui/material';
 
+import { hidePopup, showPopup } from '@containers/App/actions';
 import { selectPlaylistDetail } from './selectors';
-import { getPlaylistDetailRequest } from './actions';
+import { deletePlaylistSongRequest, getPlaylistDetailRequest } from './actions';
 
 import classes from './style.module.scss';
 
@@ -18,9 +19,17 @@ const PlaylistDetail = ({ playlistDetail }) => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const deleteHandler = () => {};
+  const deleteHandler = (data) => {
+    const confirmDeleteHandler = () => {
+      dispatch(
+        deletePlaylistSongRequest({ song_id: data?.id, playlist_id: id }, () => dispatch(getPlaylistDetailRequest(id)))
+      );
+      dispatch(hidePopup());
+    };
+
+    dispatch(showPopup('playlist_delete', 'playlist_delete_sub', 'song_delete_proceed', confirmDeleteHandler));
+  };
 
   useEffect(() => {
     dispatch(getPlaylistDetailRequest(id));

@@ -15,6 +15,7 @@ const urls = {
   playlistList: '/playlist',
   playlistDetail: '/playlist/detail',
   createPlaylist: '/playlist/create',
+  deletePlaylistSong: '/playlist/remove-song',
 
   songList: '/song',
   songDetail: '/song/detail',
@@ -60,6 +61,8 @@ export const postCreatePlaylist = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createPlaylist, 'POST', header, {}, data);
 };
+export const deletePlaylistSong = (payload) =>
+  callAPI(`${urls.deletePlaylistSong}/${payload?.playlist_id}`, 'DELETE', {}, {}, { song_id: payload?.song_id });
 export const getSongList = (params) => callAPI(urls.songList, 'GET', {}, params, {});
 export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');
 export const postCreateSong = (data) => {
