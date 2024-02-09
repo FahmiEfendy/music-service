@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 
-import { POST_LOGIN_FAILED, POST_LOGIN_REQUEST, POST_LOGIN_SUCCESS } from './constants';
+import { POST_LOGIN_FAILED, POST_LOGIN_REQUEST, POST_LOGIN_RESET, POST_LOGIN_SUCCESS } from './constants';
 
 export const initialState = {
   login: {
@@ -26,6 +26,11 @@ const loginReducer = (state = initialState, action) =>
 
       case POST_LOGIN_FAILED:
         draft.login.isError = action.error;
+        draft.login.data = [];
+        break;
+
+      case POST_LOGIN_RESET:
+        draft.login.isError = null;
         draft.login.data = [];
         break;
 

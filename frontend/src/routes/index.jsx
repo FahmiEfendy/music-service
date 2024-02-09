@@ -7,6 +7,7 @@ import Login from '@pages/Login';
 import Profile from '@pages/Profile';
 import CreateSong from '@pages/CreateSong';
 import SongList from '@pages/SongList';
+import CreatePlaylist from '@pages/CreatePlaylist';
 
 const routes = [
   {
@@ -59,6 +60,13 @@ const routes = [
         component: SongList,
         layout: MainLayout,
       },
+    ],
+  },
+  {
+    path: '/playlist',
+    name: 'Playlist',
+    subRoutes: [
+      { path: '/create/', name: 'Create Playlist', protected: 'true', component: CreatePlaylist, layout: MainLayout },
     ],
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },

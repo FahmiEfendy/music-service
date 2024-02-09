@@ -10,6 +10,7 @@ import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 
 import tokenDecoder from '@utils/tokenDecoder';
 import { setLocale } from '@containers/App/actions';
+import { postLoginReset } from '@pages/Login/actions';
 import { setLogin, setToken } from '@containers/Client/actions';
 import { selectLogin as isSelectLogin, selectToken } from '@containers/Client/selectors';
 
@@ -56,6 +57,7 @@ const Navbar = ({ title, locale, token, isLogin }) => {
   const logoutHandler = () => {
     dispatch(setLogin(false));
     dispatch(setToken(null));
+    dispatch(postLoginReset());
   };
 
   useEffect(() => {
@@ -113,7 +115,6 @@ const Navbar = ({ title, locale, token, isLogin }) => {
           <>
             <div className={classes.toolbar}>
               <div className={classes.toggle} onClick={handleClick}>
-                {/* TODO: Cannot Get User Data Because Token */}
                 <Avatar className={classes.avatar} src={userData.profilePicture} />
                 <div className={classes.lang}>{userData.fullname}</div>
                 <ExpandMoreIcon />

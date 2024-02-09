@@ -31,6 +31,7 @@ export default {
   profile_picture_label: 'Foto Profil',
 
   home_button: 'Tambahkan Musikmu',
+  home_button_create: 'Buat Playlist',
   home_button_secondary: 'Selengkapnya',
   home_artist_popular: 'Artis Populer',
   home_playlist_popular: 'Playlist Populer',

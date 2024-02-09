@@ -31,6 +31,7 @@ export default {
   profile_proceed: 'Update Profile',
 
   home_button: 'Add Your Music',
+  home_button_create: 'Create Playlist',
   home_button_secondary: 'See More',
   home_artist_popular: 'Popular Artist',
   home_playlist_popular: 'Popular Playlist',

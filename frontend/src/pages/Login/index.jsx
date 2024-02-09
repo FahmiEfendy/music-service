@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -33,13 +33,15 @@ const Login = ({ login }) => {
 
     setUsername('');
     setPassword('');
+  };
 
-    if (login.data.token) {
+  useEffect(() => {
+    if (login?.data?.token) {
       dispatch(setLogin(true));
-      dispatch(setToken(login.data.token));
+      dispatch(setToken(login?.data?.token));
       navigate('/');
     }
-  };
+  }, [dispatch, login?.data?.token, navigate]);
 
   return (
     <Container className={classes.login_container}>

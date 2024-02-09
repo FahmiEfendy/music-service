@@ -1,0 +1,104 @@
+@import "../../styles/base.scss";
+
+.create_container{
+    @include directionY;
+    margin-top: 5rem;
+    background-color: $background-color-container;
+    align-items: center;
+    padding: 2rem;
+
+    h5{
+        @include font(30px, $font-weight-medium, $text-color-secondary);
+    }
+
+    .form{
+        width: 100%;
+
+        .input_list{
+            @include directionY;
+            margin-top: 1rem;
+
+            .input_label{
+                @include font(18px, $font-weight-light, $text-color-secondary);
+                margin-bottom: .2rem;
+            }
+
+            .hide_input{
+                display: none;
+            }
+
+            .input_file{
+                width: fit-content;
+
+                .music_preview{
+                    @include directionX;
+                    align-items: center;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    background-color: $box-color-gray;
+
+                    .btn_wrapper{
+                        border-radius: 10px;
+                        background-color: white;
+                        margin-right: .5rem;
+                    }
+
+                    p {
+                        @include font(18px, $font-weight-regular, $text-color-secondary);
+                    }
+                }
+
+                .input_btn {
+                    text-transform: capitalize;
+                    margin-top: .5rem;
+                    padding: .3rem 1.5rem;
+                }
+            }
+
+
+            .input_file_cover{
+                border-radius: 10px;
+                width: fit-content;
+                padding: 0 1rem;
+                height: 200px;
+                background-color: $background-color-gray;
+                
+                label{
+                    @include directionY;
+                    align-items: center;
+                    justify-content: center;
+                    height:100%;
+                    cursor: pointer;
+
+                }
+
+                p {
+                    @include font(20px, $font-weight-regular, $text-color-secondary);
+                    margin-top: .5rem;
+                    text-align: center;
+                }
+
+                input {
+                    display: none
+                }
+            }
+
+            
+            .cover_preview{
+                border-radius: 10px;
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
+
+    .btn {
+        align-self: end;
+        
+        button {
+            text-transform: capitalize !important;
+            margin-left: 1rem;
+            padding: .2rem 1.5rem;
+        }
+    }
+}

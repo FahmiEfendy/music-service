@@ -25,7 +25,7 @@ const Home = ({ token, userList, playlistList, songList }) => {
   const [userData, setUserData] = useState('');
 
   useEffect(() => {
-    dispatch(getUserListRequest());
+    dispatch(getUserListRequest({ role: 'artist' }));
     dispatch(getPlaylistListRequest());
     dispatch(getSongListRequest());
   }, [dispatch]);
@@ -52,8 +52,8 @@ const Home = ({ token, userList, playlistList, songList }) => {
               <FormattedMessage id="home_button" />
             </Button>
           ) : (
-            <Button>
-              <FormattedMessage id="home_button_secondary" />
+            <Button onClick={() => navigate('/playlist/create')}>
+              <FormattedMessage id="home_button_create" />
             </Button>
           )}
         </Box>
