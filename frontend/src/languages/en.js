@@ -7,9 +7,11 @@ export default {
   app_popup_error_title: 'Something went wrong!',
   app_popup_error_message: 'Sorry, an error has occurred. Please try again later',
   app_popup_close_button_label: 'Close',
+  app_popup_proceed_button_label: 'Proceed',
 
   nav_profile: 'Profile',
   nav_logout: 'Logout',
+  nav_my_song: 'My Song',
 
   register_header: 'Register',
   register_confirm_password: 'Confirm Password',
@@ -41,4 +43,13 @@ export default {
   create_song_cancel: 'Cancel',
   create_song_proceed: 'Create',
   create_song_upload_cover: 'Upload Song Cover',
+
+  song_list: 'Song List',
+  song_create: 'Add Music',
+  song_cover: 'Cover',
+  song_title: 'Title',
+  song_genre: 'Genre',
+  song_delete: 'Delete Song',
+  song_delete_sub: 'Are you sure want to delete this song?',
+  song_delete_proceed: 'Delete',
 };

@@ -131,6 +131,13 @@ const Navbar = ({ title, locale, token, isLogin }) => {
                   </div>
                 </div>
               </MenuItem>
+              <MenuItem onClick={() => navigate(`/song/list/${userData?.id}`)}>
+                <div className={classes.menu}>
+                  <div className={classes.menuLang}>
+                    <FormattedMessage id="nav_my_song" />
+                  </div>
+                </div>
+              </MenuItem>
               <MenuItem onClick={logoutHandler}>
                 <div className={classes.menu}>
                   <div className={classes.menuLang}>

@@ -1,17 +1,21 @@
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { createStructuredSelector } from 'reselect';
 
 import UploadIcon from '@mui/icons-material/Upload';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { Box, Button, Container, FormControl, FormLabel, IconButton, TextField, Typography } from '@mui/material';
 
+import tokenDecoder from '@utils/tokenDecoder';
+import { selectToken } from '@containers/Client/selectors';
 import { postCreateSongRequest } from './action';
 
 import classes from './style.module.scss';
 
-const CreateSong = () => {
+const CreateSong = ({ token }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,6 +26,7 @@ const CreateSong = () => {
   const [genre, setGenre] = useState('');
   const [song, setSong] = useState('');
   const [songCover, setSongCover] = useState('');
+  const [userData, setUserData] = useState('');
 
   const inputSongCoverHandler = () => {
     songInputRef.current.click();
@@ -35,8 +40,19 @@ const CreateSong = () => {
     formData.append('song', song);
     formData.append('songCover', songCover);
 
-    dispatch(postCreateSongRequest(formData));
+    dispatch(
+      postCreateSongRequest(formData, () => {
+        navigate(`../song/list/${userData?.id}`, { replace: true });
+      })
+    );
   };
+
+  useEffect(() => {
+    if (!token) return;
+
+    const data = tokenDecoder(token);
+    setUserData(data);
+  }, [token]);
 
   return (
     <Container>
@@ -130,4 +146,12 @@ const CreateSong = () => {
   );
 };
 
-export default CreateSong;
+CreateSong.propTypes = {
+  token: PropTypes.any,
+};
+
+const mapStateToProps = createStructuredSelector({
+  token: selectToken,
+});
+
+export default connect(mapStateToProps)(CreateSong);

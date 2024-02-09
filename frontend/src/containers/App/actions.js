@@ -10,12 +10,16 @@ export const setTheme = (theme) => ({
   theme,
 });
 
-export const showPopup = (title = '', message = '') => ({
+export const showPopup = (title = '', message = '', btnText = '', btnHandler = () => {}) => ({
   type: SET_POPUP,
   popup: {
     open: true,
     title,
     message,
+    onClick: {
+      btnText,
+      btnHandler,
+    },
   },
 });
 
@@ -25,6 +29,10 @@ export const hidePopup = () => ({
     open: false,
     title: '',
     message: '',
+    onClick: {
+      btnText: '',
+      btnHandler: () => {},
+    },
   },
 });
 

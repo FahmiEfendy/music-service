@@ -1,4 +1,3 @@
-const fs = require("fs");
 const _ = require("lodash");
 const Boom = require("boom");
 
@@ -8,9 +7,11 @@ const { uploadToCloudinary } = require("../../utils/cloudinary");
 
 const fileName = "server/helpers/songHelper.js";
 
-const getSongList = async () => {
+const getSongList = async (query) => {
   try {
-    const data = await db.Song.findAll();
+    const data = await db.Song.findAll({
+      where: query?.id ? { user_id: query.id } : {},
+    });
 
     console.log([fileName, "GET All Song", "INFO"]);
 
@@ -165,8 +166,6 @@ const deleteRemoveSong = async (objectData) => {
     }
 
     await db.Song.destroy({ where: { id: song_id } });
-    fs.unlinkSync(selectedSong.path);
-    fs.unlinkSync(selectedSong.albumCoverPath);
 
     console.log([fileName, "DELETE Remove Song", "INFO"]);
 

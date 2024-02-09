@@ -17,6 +17,7 @@ const urls = {
   songList: '/song',
   songDetail: '/song/detail',
   createSong: '/song/create',
+  deleteSong: '/song/remove',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -52,9 +53,10 @@ export const patchUpdateProfile = (data) => {
   return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
 };
 export const getplaylistList = () => callAPI(urls.playlistList, 'GET');
-export const getSongList = () => callAPI(urls.songList, 'GET');
+export const getSongList = (params) => callAPI(urls.songList, 'GET', {}, params, {});
 export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');
 export const postCreateSong = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createSong, 'POST', header, {}, data);
 };
+export const deleteSong = (id) => callAPI(`${urls.deleteSong}/${id}`, 'DELETE');

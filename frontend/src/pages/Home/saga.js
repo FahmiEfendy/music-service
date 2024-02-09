@@ -40,11 +40,11 @@ function* doGetPlaylistList(action) {
   yield put(setLoading(false));
 }
 
-function* doGetSongList() {
+function* doGetSongList(action) {
   yield put(setLoading(true));
 
   try {
-    const response = yield call(getSongList);
+    const response = yield call(getSongList, action.payload);
 
     yield put(getSongListSuccess(response.data));
   } catch (err) {

@@ -7,6 +7,7 @@ import loginReducer, { storedKey as storedLoginState } from '@pages/Login/reduce
 import homeReducer, { storedKey as storedHomeState } from '@pages/Home/reducer';
 import profileReducer, { storedKey as storedProfileState } from '@pages/Profile/reducer';
 import songReducer, { storedKey as storedSongState } from '@components/MusicPlayer/reducer';
+import songListReducer, { storedKey as storedSongListState } from '@pages/SongList/reducer';
 import createSongReducer, { storedKey as storedCreateSongState } from '@pages/CreateSong/reducer';
 
 import languageReducer from '@containers/Language/reducer';
@@ -23,6 +24,7 @@ const storedReducers = {
   profile: { reducer: profileReducer, whitelist: storedProfileState },
 
   song: { reducer: songReducer, whitelist: storedSongState },
+  songList: { reducer: songListReducer, whitelist: storedSongListState },
   createSong: { reducer: createSongReducer, whitelist: storedCreateSongState },
 };
 

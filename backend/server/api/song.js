@@ -8,7 +8,7 @@ const userMiddleware = require("../middlewares/userMiddleware");
 
 const songList = async (req, res) => {
   try {
-    const response = await songHelper.getSongList();
+    const response = await songHelper.getSongList(req.query);
 
     res
       .status(200)

@@ -7,9 +7,11 @@ export default {
   app_popup_error_title: 'Terjadi kesalahan!',
   app_popup_error_message: 'Maaf, telah terjadi kesalahan. Silakan coba beberapa saat lagi',
   app_popup_close_button_label: 'Tutup',
+  app_popup_proceed_button_label: 'Lanjutkan',
 
   nav_profile: 'Profil',
   nav_logout: 'Keluar',
+  nav_my_song: 'Lagu Saya',
 
   register_header: 'Daftar',
   register_confirm_password: 'Konfirmasi Password',
@@ -41,4 +43,13 @@ export default {
   create_song_cancel: 'Kembali',
   create_song_proceed: 'Tambahkan',
   create_song_upload_cover: 'Masukkan Sampul Lagu',
+
+  song_list: 'List Lagu',
+  song_create: 'Tambahkan Lagu',
+  song_cover: 'Sampul',
+  song_title: 'Judul',
+  song_genre: 'Aliran',
+  song_delete: 'Hapus Lagu',
+  song_delete_sub: 'Apakah kamu yakin ingin menghapus lagu ini?',
+  song_delete_proceed: 'Hapus',
 };

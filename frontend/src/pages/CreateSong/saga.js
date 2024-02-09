@@ -10,6 +10,7 @@ function* doPostCreateSong(action) {
 
   try {
     const response = yield call(postCreateSong, action.payload);
+    action.callback && action.callback();
 
     yield put(postCreateSongSuccess(response.data));
   } catch (err) {

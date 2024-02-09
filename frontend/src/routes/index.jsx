@@ -6,6 +6,7 @@ import Register from '@pages/Register';
 import Login from '@pages/Login';
 import Profile from '@pages/Profile';
 import CreateSong from '@pages/CreateSong';
+import SongList from '@pages/SongList';
 
 const routes = [
   {
@@ -49,6 +50,13 @@ const routes = [
         name: 'Create Song',
         protected: true,
         component: CreateSong,
+        layout: MainLayout,
+      },
+      {
+        path: '/list/:id',
+        name: 'My Song List',
+        protected: true,
+        component: SongList,
         layout: MainLayout,
       },
     ],

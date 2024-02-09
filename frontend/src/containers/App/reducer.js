@@ -9,6 +9,10 @@ export const initialState = {
     open: false,
     title: '',
     message: '',
+    onClick: {
+      btnText: '',
+      btnHandler: () => {},
+    },
   },
   loading: false,
 };
