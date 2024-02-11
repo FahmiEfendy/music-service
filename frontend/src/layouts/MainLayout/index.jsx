@@ -10,7 +10,7 @@ import MusicPlayer from '@components/MusicPlayer';
 import { selectSongDetail } from '@components/MusicPlayer/selectors';
 
 const MainLayout = ({ children, locale, theme, intl: { formatMessage }, songDetail }) => (
-  <div>
+  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <Navbar title={formatMessage({ id: 'app_title_header' })} locale={locale} theme={theme} />
     {children}
     {songDetail?.data.length !== 0 && <MusicPlayer />}

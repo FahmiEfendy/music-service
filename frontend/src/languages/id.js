@@ -30,6 +30,7 @@ export default {
   profile_back: 'Kembali',
   profile_proceed: 'Perbarui Profil',
   profile_picture_label: 'Foto Profil',
+  profile_update_success: 'Berhasil Memperbarui Profil',
 
   home_button: 'Tambahkan Musikmu',
   home_button_create: 'Buat Playlist',
@@ -38,13 +39,20 @@ export default {
   home_playlist_popular: 'Playlist Populer',
   home_playlist_button: 'Tambahkan Lagu Ini Ke Playlist Kamu',
   home_song_popular: 'Lagu Populer',
+  home_no_artist: 'Tidak Ada Artis Ditemukan',
+  home_no_playlist: 'Tidak Ada Playlist Ditemukan',
+  home_no_song: 'Tidak Ada Lagu Ditemukan',
+  home_success: 'Berhasil',
+  home_failed: 'Gagal',
+  home_failed_add_playlist_song: 'Gagal Memasukkan Lagu Baru Ke Playlist',
+  home_success_add_playlist_song: 'Berhasil Memasukkan Lagu Baru Ke Playlist',
 
   create_playlist_header: 'Buat Playlist',
   create_playlist_file_label: 'Sampul Playlist',
   create_playlist_upload_cover: 'Unggah Sampul Playlist',
 
-  playlist_delete: 'Hapus Playlist',
-  playlist_delete_sub: 'Apakah kamu yakin ingin menghapus playlist ini?',
+  playlist_delete: 'Hapus Lagu Dari Playlist',
+  playlist_delete_sub: 'Apakah kamu yakin ingin menghapus lagu ini dari playlist?',
 
   create_song_title: 'Judul',
   create_song_genre: 'Aliran',

@@ -40,14 +40,20 @@ const PlaylistList = ({ token, playlistList }) => {
           </Typography>
         </Box>
         <Box className={classes.item_wrapper}>
-          {playlistList?.data.map((data) => (
-            <Box className={classes.item_wrapper_inner} key={data.id}>
-              <Avatar className={classes.item_image} src={data.playlistCover}>
-                <LibraryMusicIcon />
-              </Avatar>
-              <Typography variant="body1">{stringLimitter(data.name)}</Typography>
-            </Box>
-          ))}
+          {playlistList?.data?.length > 0 ? (
+            playlistList?.data.map((data) => (
+              <Box className={classes.item_wrapper_inner} key={data.id}>
+                <Avatar className={classes.item_image} src={data.playlistCover}>
+                  <LibraryMusicIcon />
+                </Avatar>
+                <Typography variant="body1">{stringLimitter(data.name)}</Typography>
+              </Box>
+            ))
+          ) : (
+            <Typography variant="body1" className={classes.center_text}>
+              <FormattedMessage id="home_no_playlist" />
+            </Typography>
+          )}
         </Box>
       </Box>
     </Container>

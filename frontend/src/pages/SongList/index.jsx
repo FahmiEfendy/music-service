@@ -49,6 +49,7 @@ const SongList = ({ songList, token }) => {
   return (
     <Container className={classes.container}>
       <Box className={classes.profile_wrapper}>
+        {/* TODO: Fix Update Profile Picture When Profile Updated */}
         <Avatar className={classes.avatar} src={userData.profilePicture} />
         <Typography variant="h5">{userData?.fullname}</Typography>
       </Box>
@@ -74,34 +75,40 @@ const SongList = ({ songList, token }) => {
               </Typography>
             </Grid>
           </ListItem>
-          {songList?.data.map((data) => (
-            <ListItem className={classes.item} key={data.id}>
-              <Grid item xs={1} className={classes.info}>
-                <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
-                  <AudiotrackIcon />
-                </Avatar>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography className={classes.song_title}>{data?.title}</Typography>
-                <Typography className={classes.song_singer}>{data?.singer}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography className={classes.song_genre}>{data?.genre}</Typography>
-              </Grid>
-              <Grid item xs={2} className={classes.action_wrapper}>
-                <IconButton>
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    deleteHandler(data);
-                  }}
-                >
-                  <DeleteIcon color="error" />
-                </IconButton>
-              </Grid>
-            </ListItem>
-          ))}
+          {songList?.data?.length > 0 ? (
+            songList?.data.map((data) => (
+              <ListItem className={classes.item} key={data.id}>
+                <Grid item xs={1} className={classes.info}>
+                  <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
+                    <AudiotrackIcon />
+                  </Avatar>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography className={classes.song_title}>{data?.title}</Typography>
+                  <Typography className={classes.song_singer}>{data?.singer}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography className={classes.song_genre}>{data?.genre}</Typography>
+                </Grid>
+                <Grid item xs={2} className={classes.action_wrapper}>
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      deleteHandler(data);
+                    }}
+                  >
+                    <DeleteIcon color="error" />
+                  </IconButton>
+                </Grid>
+              </ListItem>
+            ))
+          ) : (
+            <Typography variant="body1" className={classes.center_text}>
+              <FormattedMessage id="home_no_song" />
+            </Typography>
+          )}
         </Grid>
       </List>
     </Container>

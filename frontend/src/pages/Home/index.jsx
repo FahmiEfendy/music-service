@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ import { Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Tooltip, Ty
 
 import tokenDecoder from '@utils/tokenDecoder';
 import stringLimitter from '@utils/stringLimitter';
+import { showPopup } from '@containers/App/actions';
 import { selectToken } from '@containers/Client/selectors';
 import { getSongDetailRequest } from '@components/MusicPlayer/actions';
 import { selectAddPlaylistSong, selectPlaylistList, selectSongList, selectUserList } from './selectors';
@@ -49,7 +51,11 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
   };
 
   const addToPlaylistHandler = (song_id, playlist_id) => {
-    dispatch(postAddSongToPlaylistRequest({ song_id, playlist_id }));
+    dispatch(
+      postAddSongToPlaylistRequest({ song_id, playlist_id }, () => {
+        dispatch(showPopup('home_success', 'home_success_add_playlist_song'));
+      })
+    );
   };
 
   useEffect(() => {
@@ -75,14 +81,18 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
         <Box className={classes.feature_text}>
           <Typography variant="h5">Unleash the Beats: Your Soundtrack, Your Style</Typography>
           <Typography variant="body1">Where Rhythm Meets Innovation - Hip-Hop Your Way</Typography>
-          {userData?.role === 'artist' ? (
-            <Button onClick={() => navigate('/song/create')}>
-              <FormattedMessage id="home_button" />
-            </Button>
+          {userData?.role ? (
+            userData?.role === 'artist' ? (
+              <Button onClick={() => navigate('/song/create')}>
+                <FormattedMessage id="home_button" />
+              </Button>
+            ) : (
+              <Button onClick={() => navigate('/playlist/create')}>
+                <FormattedMessage id="home_button_create" />
+              </Button>
+            )
           ) : (
-            <Button onClick={() => navigate('/playlist/create')}>
-              <FormattedMessage id="home_button_create" />
-            </Button>
+            ''
           )}
         </Box>
         <Box className={classes.feature_backdrop} />
@@ -94,12 +104,14 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
           <Typography variant="h5">
             <FormattedMessage id="home_artist_popular" />
           </Typography>
-          <Button className={classes.more_btn}>
-            <FormattedMessage id="home_button_secondary" />
-          </Button>
+          {userList?.data?.length > 0 && (
+            <Button className={classes.more_btn}>
+              <FormattedMessage id="home_button_secondary" />
+            </Button>
+          )}
         </Box>
         <Box className={classes.item_container}>
-          {userList?.data &&
+          {userList?.data?.length > 0 ? (
             userList?.data.map((data) => (
               <Box className={classes.item_wrapper} key={data.id}>
                 <Box className={classes.item_wrapper_inner}>
@@ -107,7 +119,12 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
                   <Typography variant="body1">{data.fullname}</Typography>
                 </Box>
               </Box>
-            ))}
+            ))
+          ) : (
+            <Typography variant="body1" align="center">
+              <FormattedMessage id="home_no_artist" />
+            </Typography>
+          )}
         </Box>
       </Box>
 
@@ -117,21 +134,29 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
           <Typography variant="h5">
             <FormattedMessage id="home_playlist_popular" />
           </Typography>
-          <Button className={classes.more_btn}>
-            <FormattedMessage id="home_button_secondary" />
-          </Button>
+          {playlistList?.data?.length > 0 && (
+            <Button className={classes.more_btn}>
+              <FormattedMessage id="home_button_secondary" />
+            </Button>
+          )}
         </Box>
         <Box className={classes.item_container}>
-          {playlistList?.data.map((data) => (
-            <Box className={classes.item_wrapper} key={data.id}>
-              <Box className={classes.item_wrapper_inner} onClick={() => navigate(`playlist/detail/${data.id}`)}>
-                <Avatar className={classes.item_image} src={data.playlistCover}>
-                  <LibraryMusicIcon />
-                </Avatar>
-                <Typography variant="body1">{stringLimitter(data.name)}</Typography>
+          {playlistList?.data?.length > 0 ? (
+            playlistList?.data.map((data) => (
+              <Box className={classes.item_wrapper} key={data.id}>
+                <Box className={classes.item_wrapper_inner} onClick={() => navigate(`playlist/detail/${data.id}`)}>
+                  <Avatar className={classes.item_image} src={data.playlistCover}>
+                    <LibraryMusicIcon />
+                  </Avatar>
+                  <Typography variant="body1">{stringLimitter(data.name)}</Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))
+          ) : (
+            <Typography variant="body1" align="center">
+              <FormattedMessage id="home_no_playlist" />
+            </Typography>
+          )}
         </Box>
       </Box>
 
@@ -141,58 +166,67 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
           <Typography variant="h5">
             <FormattedMessage id="home_song_popular" />
           </Typography>
-          <Button className={classes.more_btn}>
-            <FormattedMessage id="home_button_secondary" />
-          </Button>
+          {songList?.data?.length > 0 && (
+            <Button className={classes.more_btn}>
+              <FormattedMessage id="home_button_secondary" />
+            </Button>
+          )}
         </Box>
         <Box className={classes.item_container}>
-          {songList?.data.map((data) => (
-            <Box className={classes.item_wrapper} key={data.id}>
-              <div className={classes.toolbar} onClick={listPlaylistClickHandler(data.id)}>
-                <Tooltip title={<FormattedMessage id="home_playlist_button" />} arrow>
-                  <IconButton className={classes.button}>
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                </Tooltip>
-              </div>
-              <Menu
-                open={openedElement === data.id}
-                anchorEl={listPlaylistPosition}
-                onClose={listPlaylistCloseHandler}
-                className={classes.menu_container}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-              >
-                {userData?.playlists?.map((item, index) => (
-                  <MenuItem key={index}>
-                    <div className={classes.menu}>
-                      <div className={classes.menuLang} onClick={() => addToPlaylistHandler(data.id, item.id)}>
-                        {item.name}
+          {songList?.data?.length > 0 ? (
+            songList?.data.map((data) => (
+              <Box className={classes.item_wrapper} key={data.id}>
+                <div className={classes.toolbar} onClick={listPlaylistClickHandler(data.id)}>
+                  <Tooltip title={<FormattedMessage id="home_playlist_button" />} arrow>
+                    <IconButton className={classes.button}>
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+                <Menu
+                  open={openedElement === data.id}
+                  anchorEl={listPlaylistPosition}
+                  onClose={listPlaylistCloseHandler}
+                  className={classes.menu_container}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                >
+                  {/* TODO: Fix GET User's Playlist Without Relogin */}
+                  {userData?.playlists?.map((item, index) => (
+                    <MenuItem key={index}>
+                      <div className={classes.menu}>
+                        <div className={classes.menuLang} onClick={() => addToPlaylistHandler(data.id, item.id)}>
+                          {item.name}
+                        </div>
                       </div>
-                    </div>
-                  </MenuItem>
-                ))}
-              </Menu>
-              <Box
-                className={classes.item_wrapper_inner}
-                key={data.id}
-                onClick={() => {
-                  playSongHandler(data.id);
-                }}
-              >
-                <Avatar className={classes.item_image} src={data?.songCoverUrl}>
-                  <AudiotrackIcon />
-                </Avatar>
-                <Typography variant="body1">{`${data?.singer} - ${data?.title}`}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+                <Box
+                  className={classes.item_wrapper_inner}
+                  key={data.id}
+                  onClick={() => {
+                    playSongHandler(data.id);
+                  }}
+                >
+                  <Avatar className={classes.item_image} src={data?.songCoverUrl}>
+                    <AudiotrackIcon />
+                  </Avatar>
+                  <Typography variant="body1">{`${data?.singer} - ${data?.title}`}</Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))
+          ) : (
+            <Typography variant="body1" align="center">
+              <FormattedMessage id="home_no_song" />
+            </Typography>
+          )}
         </Box>
       </Box>
     </Container>

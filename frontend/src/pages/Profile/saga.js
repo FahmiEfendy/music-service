@@ -3,7 +3,12 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import { setLoading } from '@containers/App/actions';
 import { getUserDetail, patchUpdateProfile } from '@domain/api';
 import { GET_USER_DETAIL_REQUEST, PATCH_UPDATE_PROFILE_REQUEST } from './constans';
-import { getUserDetailFailed, getUserDetailSuccess, patchUpdateProfileFailed } from './actions';
+import {
+  getUserDetailFailed,
+  getUserDetailSuccess,
+  patchUpdateProfileFailed,
+  patchUpdateProfileSuccess,
+} from './actions';
 
 function* doGetUserDetail() {
   yield put(setLoading(true));
@@ -24,8 +29,9 @@ function* doPatchUpdateProfile(action) {
 
   try {
     const response = yield call(patchUpdateProfile, action.data);
+    action.callback && action.callback();
 
-    yield put(patchUpdateProfile(response.data));
+    yield put(patchUpdateProfileSuccess(response.data));
   } catch (err) {
     yield put(patchUpdateProfileFailed(err.message));
   }

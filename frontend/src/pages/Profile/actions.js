@@ -23,9 +23,10 @@ export const getUserDetailFailed = (error) => ({
 });
 
 // PATCH Update Profile
-export const patchUpdateProfileRequest = (data) => ({
+export const patchUpdateProfileRequest = (data, callback) => ({
   type: PATCH_UPDATE_PROFILE_REQUEST,
   data,
+  callback,
 });
 
 export const patchUpdateProfileSuccess = () => ({

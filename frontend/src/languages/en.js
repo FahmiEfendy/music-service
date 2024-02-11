@@ -30,6 +30,7 @@ export default {
   profile_upload: 'Upload Profile Picture',
   profile_back: 'Go Back',
   profile_proceed: 'Update Profile',
+  profile_update_success: 'Successfully Update Profile',
 
   home_button: 'Add Your Music',
   home_button_create: 'Create Playlist',
@@ -38,13 +39,20 @@ export default {
   home_playlist_popular: 'Popular Playlist',
   home_playlist_button: 'Add This Song To Your Playlist',
   home_song_popular: 'Popular Song',
+  home_no_artist: 'No Artist Found',
+  home_no_playlist: 'No Playlist Found',
+  home_no_song: 'No Song Found',
+  home_success: 'Success',
+  home_failed: 'Failed',
+  home_success_add_playlist_song: 'Successfully Added New Song To Your Playlist',
+  home_failed_add_playlist_song: 'Failed Added New Song To Your Playlist',
 
   create_playlist_header: 'Create Playlist',
   create_playlist_file_label: 'Playlist Cover',
   create_playlist_upload_cover: 'Upload Playlist Cover',
 
-  playlist_delete: 'Delete Playlist',
-  playlist_delete_sub: 'Are you sure want to delete this playlist?',
+  playlist_delete: 'Delete Song From Playlist',
+  playlist_delete_sub: 'Are you sure want to delete this song from your playlist?',
 
   create_song_title: 'Title',
   create_song_genre: 'Genre',

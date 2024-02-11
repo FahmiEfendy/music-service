@@ -96,6 +96,7 @@ const userDetail = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
+  // TODO: Fix Undefined When Only Update Fullname
   try {
     const validateData = {
       fullname: req.body.fullname,

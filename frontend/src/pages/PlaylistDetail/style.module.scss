@@ -67,5 +67,11 @@
                 margin-left: auto;
             }
         }
+
+        .text_center{
+            @include font(16px, $font-weight-regular, $text-color-secondary);
+            width: 100%;
+            text-align: center;
+        }
     }
 }

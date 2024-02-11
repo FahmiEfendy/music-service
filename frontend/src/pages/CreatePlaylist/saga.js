@@ -10,6 +10,7 @@ function* doPostCreatePlaylist(action) {
 
   try {
     const response = yield call(postCreatePlaylist, action.payload);
+    action.callback && action.callback();
 
     yield put(postCreatePlaylistSuccess(response.data));
   } catch (err) {

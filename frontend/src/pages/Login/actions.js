@@ -1,8 +1,9 @@
 import { POST_LOGIN_FAILED, POST_LOGIN_REQUEST, POST_LOGIN_RESET, POST_LOGIN_SUCCESS } from './constants';
 
-export const postLoginRequest = (payload) => ({
+export const postLoginRequest = (payload, callback) => ({
   type: POST_LOGIN_REQUEST,
   payload,
+  callback,
 });
 
 export const postLoginSuccess = (data) => ({

@@ -66,6 +66,7 @@ function* doPostAddPlaylistSong(action) {
 
   try {
     const response = yield call(postAddPlaylistSong, action.payload);
+    action.callback && action.callback();
 
     yield put(postAddSongToPlaylistSuccess(response.data));
   } catch (err) {

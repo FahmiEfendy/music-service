@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch } from 'react-redux';
 import {
   Box,
   Button,
@@ -18,12 +16,11 @@ import {
 } from '@mui/material';
 
 import encryptPayload from '@utils/encryptPayload';
-import { selectRegister } from './selectors';
 import { postRegisterRequest } from './actions';
 
 import classes from './style.module.scss';
 
-const Register = ({ register }) => {
+const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,17 +40,13 @@ const Register = ({ register }) => {
       role,
     };
 
-    dispatch(postRegisterRequest(payload));
+    dispatch(postRegisterRequest(payload, () => navigate('/login')));
 
     setUsername('');
     setFullname('');
     setPassword('');
     setConfirmPassword('');
     setRole('');
-
-    if (register.isError) return;
-
-    navigate('/login');
   };
 
   return (
@@ -110,12 +103,4 @@ const Register = ({ register }) => {
   );
 };
 
-Register.propTypes = {
-  register: PropTypes.object,
-};
-
-const mapStateToProps = createStructuredSelector({
-  register: selectRegister,
-});
-
-export default connect(mapStateToProps)(Register);
+export default Register;

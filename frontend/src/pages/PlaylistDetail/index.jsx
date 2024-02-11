@@ -61,31 +61,37 @@ const PlaylistDetail = ({ playlistDetail }) => {
                 </Typography>
               </Grid>
             </ListItem>
-            {playlistDetail?.data?.songs?.map((data) => (
-              <ListItem className={classes.item} key={data.id}>
-                <Grid item xs={1} className={classes.info}>
-                  <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
-                    <AudiotrackIcon />
-                  </Avatar>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography className={classes.song_title}>{data?.title}</Typography>
-                  <Typography className={classes.song_singer}>{data?.singer}</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography className={classes.song_genre}>{data?.genre}</Typography>
-                </Grid>
-                <Grid item xs={1} className={classes.action_wrapper}>
-                  <IconButton
-                    onClick={() => {
-                      deleteHandler(data);
-                    }}
-                  >
-                    <FavoriteIcon color="error" />
-                  </IconButton>
-                </Grid>
-              </ListItem>
-            ))}
+            {playlistDetail?.data?.songs?.length > 0 ? (
+              playlistDetail?.data?.songs?.map((data) => (
+                <ListItem className={classes.item} key={data.id}>
+                  <Grid item xs={1} className={classes.info}>
+                    <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
+                      <AudiotrackIcon />
+                    </Avatar>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography className={classes.song_title}>{data?.title}</Typography>
+                    <Typography className={classes.song_singer}>{data?.singer}</Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography className={classes.song_genre}>{data?.genre}</Typography>
+                  </Grid>
+                  <Grid item xs={1} className={classes.action_wrapper}>
+                    <IconButton
+                      onClick={() => {
+                        deleteHandler(data);
+                      }}
+                    >
+                      <FavoriteIcon color="error" />
+                    </IconButton>
+                  </Grid>
+                </ListItem>
+              ))
+            ) : (
+              <Typography variant="body1" className={classes.text_center}>
+                <FormattedMessage id="home_no_playlist" />
+              </Typography>
+            )}
           </Grid>
         </List>
       </Container>

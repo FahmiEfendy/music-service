@@ -61,9 +61,10 @@ export const getSongListFailed = (error) => ({
   error,
 });
 
-export const postAddSongToPlaylistRequest = (payload) => ({
+export const postAddSongToPlaylistRequest = (payload, callback) => ({
   type: POST_ADD_PLAYLIST_SONG_REQUEST,
   payload,
+  callback,
 });
 
 export const postAddSongToPlaylistSuccess = (data) => ({

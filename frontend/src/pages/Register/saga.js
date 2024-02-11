@@ -9,6 +9,7 @@ function* doPostRegister(action) {
   yield put(setLoading(true));
   try {
     const response = yield call(postRegister, action.payload);
+    action.callback && action.callback();
 
     yield put(postRegisterSuccess(response));
   } catch (err) {

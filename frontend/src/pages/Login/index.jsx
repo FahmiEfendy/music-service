@@ -27,19 +27,13 @@ const Login = ({ login }) => {
       password: encryptPayload(password),
     };
 
-    dispatch(postLoginRequest(payload));
-
-    if (login.isError !== '') return;
-
-    setUsername('');
-    setPassword('');
+    dispatch(postLoginRequest(payload, () => navigate('/')));
   };
 
   useEffect(() => {
     if (login?.data?.token) {
       dispatch(setLogin(true));
       dispatch(setToken(login?.data?.token));
-      navigate('/');
     }
   }, [dispatch, login?.data?.token, navigate]);
 

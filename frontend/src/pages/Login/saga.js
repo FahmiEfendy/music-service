@@ -10,6 +10,7 @@ function* doPostLogin(action) {
 
   try {
     const response = yield call(postLogin, action.payload);
+    action.callback && action.callback();
 
     yield put(postLoginSuccess(response.data));
   } catch (err) {

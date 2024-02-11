@@ -46,6 +46,7 @@ export const callAPI = async (endpoint, method, header = {}, params = {}, data =
 
 export const ping = () => callAPI(urls.ping, 'get');
 
+// User
 export const postRegister = (data) => {
   callAPI(urls.register, 'POST', {}, {}, data);
 };
@@ -56,20 +57,31 @@ export const patchUpdateProfile = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.updateProfile, 'PATCH', header, {}, data);
 };
-export const getplaylistList = (params) => callAPI(urls.playlistList, 'GET', params, {});
-export const getPlaylistDetail = (id) => callAPI(`${urls.playlistDetail}/${id}`, 'GET');
+// TODO: PATCH Change Password
+// TODO: POST Forgot Password
+// TODO: POST Reset Password
+// TODO: DELETE Remove User
+
+// Playlist
 export const postCreatePlaylist = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createPlaylist, 'POST', header, {}, data);
 };
+export const getplaylistList = (params) => callAPI(urls.playlistList, 'GET', params, {});
+export const getPlaylistDetail = (id) => callAPI(`${urls.playlistDetail}/${id}`, 'GET');
+// TODO: PATCH Update Playlist
+// TODO: DELETE Remove Playlist
 export const postAddPlaylistSong = (payload) =>
   callAPI(`${urls.addPlaylistSong}/${payload?.playlist_id}`, 'POST', {}, {}, { song_id: payload?.song_id });
 export const deletePlaylistSong = (payload) =>
   callAPI(`${urls.deletePlaylistSong}/${payload?.playlist_id}`, 'DELETE', {}, {}, { song_id: payload?.song_id });
-export const getSongList = (params) => callAPI(urls.songList, 'GET', {}, params, {});
-export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');
+
+// Song
 export const postCreateSong = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createSong, 'POST', header, {}, data);
 };
+export const getSongList = (params) => callAPI(urls.songList, 'GET', {}, params, {});
+export const getSongDetail = (id) => callAPI(`${urls.songDetail}/${id}`, 'GET');
+// TODO: PATCH Update Song
 export const deleteSong = (id) => callAPI(`${urls.deleteSong}/${id}`, 'DELETE');

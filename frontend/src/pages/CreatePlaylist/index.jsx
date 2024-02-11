@@ -1,20 +1,26 @@
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { createStructuredSelector } from 'reselect';
 
 import UploadIcon from '@mui/icons-material/Upload';
 import { Box, Button, Container, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 
-import classes from './style.module.scss';
+import tokenDecoder from '@utils/tokenDecoder';
+import { selectToken } from '@containers/Client/selectors';
 import { postCreatePlaylistRequest } from './actions';
 
-const CreatePlaylist = () => {
+import classes from './style.module.scss';
+
+const CreatePlaylist = ({ token }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const playlistCoverInputRef = useRef(null);
 
+  const [userData, setUserData] = useState('');
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [playlistCover, setPlaylistCover] = useState('');
 
@@ -24,8 +30,15 @@ const CreatePlaylist = () => {
     payload.append('name', playlistTitle);
     payload.append('playlistCover', playlistCover);
 
-    dispatch(postCreatePlaylistRequest(payload));
+    dispatch(postCreatePlaylistRequest(payload, () => navigate(`/playlist/list/${userData?.id}`)));
   };
+
+  useEffect(() => {
+    if (!token) return;
+
+    const data = tokenDecoder(token);
+    setUserData(data);
+  }, [token]);
 
   return (
     <Container>
@@ -86,4 +99,12 @@ const CreatePlaylist = () => {
   );
 };
 
-export default CreatePlaylist;
+CreatePlaylist.propTypes = {
+  token: PropTypes.any,
+};
+
+const mapStateToProps = createStructuredSelector({
+  token: selectToken,
+});
+
+export default connect(mapStateToProps)(CreatePlaylist);

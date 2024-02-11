@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 
+import { showPopup } from '@containers/App/actions';
 import { selectUserDetail } from './selectors';
 import { getUserDetailRequest, patchUpdateProfileRequest } from './actions';
 
@@ -38,7 +39,11 @@ const Profile = ({ userDetail }) => {
     formData.append('fullname', fullname);
     formData.append('profilePicture', file);
 
-    dispatch(patchUpdateProfileRequest(formData));
+    dispatch(
+      patchUpdateProfileRequest(formData, () => {
+        dispatch(showPopup('home_success', 'profile_update_success'));
+      })
+    );
   };
 
   useEffect(() => {
