@@ -6,23 +6,49 @@
     height: 100vh;
 
     .register_container_inner{
-        @include directionX;
         border-radius: 10px;
         padding: 1rem;
         background-color: white;
+
+        @include apply-at-xs-size{
+            @include directionY;
+        }
+
+        @include apply-at-lg-size{
+            @include directionX;
+        }
         
         .wrapper_left{
             border-radius: 10px;
-            width: 55%;
             background-image: url("../../assets/register.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: bottom;
+
+            
+            @include apply-at-xs-size{
+                height: 200px;
+                width: 100%;
+            }
+
+            
+            @include apply-at-lg-size{
+                width: 55%;
+                height: auto;
+            }
         }
         
         .wrapper_right{
-            width: 45%;
-            padding: 2rem;
+            @include apply-at-xs-size{
+                width: 100%;
+                padding:0;
+                margin-top: 2rem;
+            }
+
+            @include apply-at-lg-size{
+                width: 45%;
+                padding: 2rem;
+            }
 
             h5{
                 @include font(30px, $font-weight-medium, $text-color-secondary);
@@ -62,7 +88,14 @@
             .login{
                 text-align: center;
                 margin-top: .5rem;
-                @include font(14px, $font-weight-light, $text-color-third);
+                
+                @include apply-at-xs-size{
+                    @include font(12px, $font-weight-light, $text-color-third);
+                }
+
+                @include apply-at-lg-size{
+                    @include font(14px, $font-weight-light, $text-color-third);
+                }
 
                 a {
                 text-decoration: underline;

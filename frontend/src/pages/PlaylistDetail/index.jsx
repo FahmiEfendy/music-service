@@ -45,7 +45,7 @@ const PlaylistDetail = ({ playlistDetail }) => {
         <List className={classes.list}>
           <Grid container>
             <ListItem>
-              <Grid item xs={1}>
+              <Grid item xs={3}>
                 <Typography variant="body1" className={classes.header}>
                   <FormattedMessage id="song_cover" />
                 </Typography>
@@ -55,7 +55,7 @@ const PlaylistDetail = ({ playlistDetail }) => {
                   <FormattedMessage id="song_title" />
                 </Typography>
               </Grid>
-              <Grid item xs={1}>
+              <Grid item xs={2}>
                 <Typography variant="body1" className={classes.header}>
                   <FormattedMessage id="song_genre" />
                 </Typography>
@@ -64,7 +64,7 @@ const PlaylistDetail = ({ playlistDetail }) => {
             {playlistDetail?.data?.songs?.length > 0 ? (
               playlistDetail?.data?.songs?.map((data) => (
                 <ListItem className={classes.item} key={data.id}>
-                  <Grid item xs={1} className={classes.info}>
+                  <Grid item xs={3} className={classes.info}>
                     <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
                       <AudiotrackIcon />
                     </Avatar>
@@ -73,7 +73,7 @@ const PlaylistDetail = ({ playlistDetail }) => {
                     <Typography className={classes.song_title}>{data?.title}</Typography>
                     <Typography className={classes.song_singer}>{data?.singer}</Typography>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     <Typography className={classes.song_genre}>{data?.genre}</Typography>
                   </Grid>
                   <Grid item xs={1} className={classes.action_wrapper}>

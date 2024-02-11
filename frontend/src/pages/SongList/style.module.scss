@@ -13,7 +13,12 @@
 
         .avatar{
             width: 150px;
-            height: 150px
+            height: 150px;
+
+            @include apply-at-xs-size{
+                width: 100px;
+                height: 100px;
+            }
         }
 
         h5{
@@ -34,7 +39,7 @@
 
         .header{
             @include font(14px, $font-weight-medium, $text-color-secondary);
-
+            margin-top: 1rem;
         }
 
         h5 {
@@ -49,6 +54,11 @@
             .song_cover{
                 width: 80px;
                 height: 80px;
+
+                @include apply-at-xs-size{
+                    width: 60px;
+                    height: 60px;
+                }
             }     
 
             .song_title{
@@ -64,7 +74,13 @@
             }
     
             .action_wrapper{
+                @include directionX;
                 margin-left: auto;
+                
+                button {
+                    padding: 0;
+                    margin-right: .2erem
+                }
             }
         }
 

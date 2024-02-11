@@ -49,7 +49,12 @@
             .song_cover{
                 width: 80px;
                 height: 80px;
-            }     
+
+                @include apply-at-xs-size{
+                    width: 60px;
+                    height: 60px;
+                }     
+            }   
     
             .song_title{
                 @include font(22px, $font-weight-medium, $text-color-secondary);

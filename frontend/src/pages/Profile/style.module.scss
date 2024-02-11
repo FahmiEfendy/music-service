@@ -78,6 +78,7 @@
 
         .button_wrapper{
             @include directionX;
+            margin-top: 2rem;
 
             button {
                 text-transform: capitalize;

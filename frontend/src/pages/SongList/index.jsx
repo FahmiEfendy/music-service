@@ -58,7 +58,7 @@ const SongList = ({ songList, token }) => {
         </Button>
         <Grid container>
           <ListItem>
-            <Grid item xs={1}>
+            <Grid item xs={3}>
               <Typography variant="body1" className={classes.header}>
                 <FormattedMessage id="song_cover" />
               </Typography>
@@ -68,7 +68,7 @@ const SongList = ({ songList, token }) => {
                 <FormattedMessage id="song_title" />
               </Typography>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2}>
               <Typography variant="body1" className={classes.header}>
                 <FormattedMessage id="song_genre" />
               </Typography>
@@ -77,7 +77,7 @@ const SongList = ({ songList, token }) => {
           {songList?.data?.length > 0 ? (
             songList?.data.map((data) => (
               <ListItem className={classes.item} key={data.id}>
-                <Grid item xs={1} className={classes.info}>
+                <Grid item xs={3} className={classes.info}>
                   <Avatar src={data?.songCoverUrl} className={classes.song_cover}>
                     <AudiotrackIcon />
                   </Avatar>
@@ -86,10 +86,10 @@ const SongList = ({ songList, token }) => {
                   <Typography className={classes.song_title}>{data?.title}</Typography>
                   <Typography className={classes.song_singer}>{data?.singer}</Typography>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                   <Typography className={classes.song_genre}>{data?.genre}</Typography>
                 </Grid>
-                <Grid item xs={2} className={classes.action_wrapper}>
+                <Grid item xs={1} className={classes.action_wrapper}>
                   <IconButton>
                     <EditIcon />
                   </IconButton>

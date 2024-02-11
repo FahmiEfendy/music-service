@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
-import { Avatar, Box, Container, Typography } from '@mui/material';
+import { Avatar, Box, Button, Container, Typography } from '@mui/material';
 
 import tokenDecoder from '@utils/tokenDecoder';
 import stringLimitter from '@utils/stringLimitter';
@@ -17,6 +18,7 @@ import classes from './style.module.scss';
 
 const PlaylistList = ({ token, playlistList }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState('');
 
@@ -38,11 +40,18 @@ const PlaylistList = ({ token, playlistList }) => {
           <Typography variant="h5">
             <FormattedMessage id="nav_my_playlist" />
           </Typography>
+          <Button type="button" variant="contained" onClick={() => navigate('/playlist/create')}>
+            <FormattedMessage id="create_playlist_header" />
+          </Button>
         </Box>
         <Box className={classes.item_wrapper}>
           {playlistList?.data?.length > 0 ? (
             playlistList?.data.map((data) => (
-              <Box className={classes.item_wrapper_inner} key={data.id}>
+              <Box
+                className={classes.item_wrapper_inner}
+                key={data.id}
+                onClick={() => navigate(`/playlist/detail/${data.id}`)}
+              >
                 <Avatar className={classes.item_image} src={data.playlistCover}>
                   <LibraryMusicIcon />
                 </Avatar>

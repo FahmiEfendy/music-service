@@ -29,14 +29,42 @@
             z-index: 10;
             color: white;
 
+            @include apply-at-xs-size{
+                padding: 0 1rem;
+                height: 40%
+            }
+
+            @include apply-at-xs-size{
+                padding: 0 2rem;
+            }
+
             h5 {
-                width: 60%;
-                line-height: 3.5rem;
-                @include font(50px, $font-weight-bold, $text-color-primary)
+                @include apply-at-xs-size{
+                    width: 100%;
+                    line-height: 1.8rem;
+                    @include font(22px, $font-weight-bold, $text-color-primary);
+                }
+
+                @include apply-at-md-size{
+                    width: 70%;
+                    line-height: 2.5rem;
+                    @include font(36px, $font-weight-bold, $text-color-primary);
+                }
+
+                @include apply-at-xl-size{
+                    width: 60%;
+                    line-height: 3.5rem;
+                    @include font(50px, $font-weight-bold, $text-color-primary);
+                }
             }
             
+            
             p {
-                @include font(18px, $font-weight-regular, $text-color-primary)
+                @include font(18px, $font-weight-regular, $text-color-primary);
+                
+                @include apply-at-xs-size{
+                    @include font(16px, $font-weight-thin, $text-color-primary);
+                }
             }
 
             button {
@@ -81,12 +109,18 @@
 
         .item_container{
             @include directionX;
+            overflow-x: scroll;
             
             .item_wrapper{
                 @include directionX;
                 position: relative;
-                margin-right: 2rem;
-    
+                margin-right: .5rem;
+
+                @include apply-at-sm-size{
+                    margin-right: 1.5rem;
+                }
+                
+
                 .toolbar{
                     position: absolute;
                     z-index: 5;
@@ -109,8 +143,8 @@
     
                     .item_image{
                         border-radius: 10%;
-                        height: 150px;
-                        width: auto;
+                        height: 120px;
+                        width: 120px;
     
                         svg{
                             width: 90px;
@@ -127,7 +161,11 @@
                         margin-top: .3rem;
                         @include font(16px, $font-weight-regular, $text-color-secondary);
                         text-align: center;
-                        width: 8rem;
+                        max-width: 120px;
+                        
+                        @include apply-at-xs-size{
+                            @include font(12px, $font-weight-regular, $text-color-secondary);
+                        }
                     }
                 }
             }

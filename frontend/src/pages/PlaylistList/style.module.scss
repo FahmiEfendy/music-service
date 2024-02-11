@@ -10,10 +10,18 @@
         margin-top: 3rem;
 
         .list_header{
+            @include directionY;
+
             h5{
                 @include font(30px, $font-weight-regular, $text-color-secondary);
                 margin-bottom: .5rem;
                 text-align: center
+            }
+
+            button {
+                margin-left: auto;
+                align-self: flex-end;
+                text-transform: capitalize
             }
         }
 

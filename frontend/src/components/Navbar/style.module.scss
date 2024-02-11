@@ -27,6 +27,14 @@
       }
       .title {
         font-weight: 700;
+
+        @include apply-at-xs-size{
+          font-size: .8rem
+        }
+
+        @include apply-at-lg-size{
+          font-size: 1rem
+        }
       }
     }
 
@@ -51,7 +59,13 @@
         }
 
         .lang {
-          @include font(18px, $font-weight-medium, $text-color-secondary);
+          @include apply-at-xs-size{
+            @include font(12px, $font-weight-medium, $text-color-secondary);
+          }
+          
+          @include apply-at-lg-size{  
+            @include font(18px, $font-weight-medium, $text-color-secondary);
+          }
         }
 
         .arrow {
@@ -63,6 +77,10 @@
     .toolbar_lang{
       @extend .toolbar;
       margin: 0 1rem 0 auto;
+
+      @include apply-at-xs-size{
+        margin-right: 0.5rem;
+      }
     }
 
     .login_btn{

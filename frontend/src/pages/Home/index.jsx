@@ -135,7 +135,7 @@ const Home = ({ userList, playlistList, songList, addPlaylistSong, userDetail })
         </Box>
         <Box className={classes.item_container}>
           {playlistList?.data?.length > 0 ? (
-            playlistList?.data.map((data) => (
+            playlistList?.data?.map((data) => (
               <Box className={classes.item_wrapper} key={data.id}>
                 <Box className={classes.item_wrapper_inner} onClick={() => navigate(`playlist/detail/${data.id}`)}>
                   <Avatar className={classes.item_image} src={data.playlistCover}>

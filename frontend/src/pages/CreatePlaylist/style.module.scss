@@ -8,7 +8,9 @@
     padding: 2rem;
 
     h5{
-        @include font(30px, $font-weight-medium, $text-color-secondary);
+        @include apply-at-xs-size{
+            @include font(20px, $font-weight-medium, $text-color-secondary);
+        }
     }
 
     .form{
@@ -62,6 +64,10 @@
                 padding: 0 1rem;
                 height: 200px;
                 background-color: $background-color-gray;
+
+                @include apply-at-xs-size{
+                    height: 180px
+                }
                 
                 label{
                     @include directionY;
@@ -94,6 +100,7 @@
 
     .btn {
         align-self: end;
+        margin-top: 2rem;
         
         button {
             text-transform: capitalize !important;

@@ -8,26 +8,47 @@
     background-color: $background-color-container;
     border-radius: 10px 10px 0px 0px;
 
+    @include apply-at-xs-size{
+        padding: 0
+    }
+
     .player_container_inner{
         @include directionX;
 
         .song_info{
             @include directionX;
             align-items: center;
-            width:20%;
+            
+            @include apply-at-xs-size{
+                width:30%;
+            }
+            
+            @include apply-at-sm-size{
+                width:20%;
+            }
     
             .song_info_text{
                 margin-left: .5rem;
 
-                .cover{
-                }
-
                 p:nth-of-type(1){
-                    @include font(18px, $font-weight-medium, $text-color-secondary);
+                    @include apply-at-xs-size{
+                        @include font(12px, $font-weight-medium, $text-color-secondary);
+                    }
+                    
+                    @include apply-at-lg-size{
+                        @include font(18px, $font-weight-medium, $text-color-secondary);
+
+                    }
                 }
                 
                 p:nth-of-type(2){
-                    @include font(14px, $font-weight-regular, $text-color-secondary);
+                    @include apply-at-xs-size{
+                        @include font(8px, $font-weight-regular, $text-color-secondary);
+                    }
+                    
+                    @include apply-at-lg-size{
+                        @include font(14px, $font-weight-regular, $text-color-secondary);
+                    }
                 }
             }
         }
@@ -49,6 +70,7 @@
             .bar{
                 @include directionX;
                 align-items: center;
+
                 
                p{
                 margin: 0;
@@ -56,8 +78,23 @@
                }
                 
                 input {
-                    min-width: 400px;
                     margin: 0 .5rem;
+
+                    @include apply-at-xs-size{
+                        min-width: 10px;
+                    }
+                    
+                    @include apply-at-sm-size{
+                        min-width: 200px;
+                    }
+                    
+                    @include apply-at-md-size{
+                        min-width: 300px;
+                    }
+
+                    @include apply-at-lg-size{                    
+                        min-width: 400px;
+                    }
                 }
             }           
         }
