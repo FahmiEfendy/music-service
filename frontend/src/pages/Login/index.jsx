@@ -29,7 +29,7 @@ const Login = ({ login }) => {
 
     dispatch(postLoginRequest(payload));
 
-    if (login.isError) return;
+    if (login.isError !== '') return;
 
     setUsername('');
     setPassword('');

@@ -36,6 +36,7 @@ export default {
   home_button_secondary: 'See More',
   home_artist_popular: 'Popular Artist',
   home_playlist_popular: 'Popular Playlist',
+  home_playlist_button: 'Add This Song To Your Playlist',
   home_song_popular: 'Popular Song',
 
   create_playlist_header: 'Create Playlist',

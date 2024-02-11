@@ -124,12 +124,17 @@ const postLogin = async (objectData) => {
       throw Boom.badRequest(`Invalid password!`);
     }
 
+    const ownedPlaylist = await db.Playlist.findAll({
+      where: { user_id: selectedUser.id },
+    });
+
     const token = __generateToken({
       id: selectedUser.id,
       username: selectedUser.username,
       fullname: selectedUser.fullname,
       role: selectedUser.role,
       profilePicture: selectedUser?.profilePicture,
+      playlists: ownedPlaylist,
     });
 
     console.log([fileName, "POST Login", "INFO"]);

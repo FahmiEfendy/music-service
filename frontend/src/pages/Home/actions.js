@@ -8,6 +8,9 @@ import {
   GET_USER_LIST_FAILED,
   GET_USER_LIST_REQUEST,
   GET_USER_LIST_SUCCESS,
+  POST_ADD_PLAYLIST_SONG_FAILED,
+  POST_ADD_PLAYLIST_SONG_REQUEST,
+  POST_ADD_PLAYLIST_SONG_SUCCESS,
 } from './constants';
 
 // GET User List
@@ -55,5 +58,20 @@ export const getSongListSuccess = (data) => ({
 
 export const getSongListFailed = (error) => ({
   type: GET_SONG_LIST_FAILED,
+  error,
+});
+
+export const postAddSongToPlaylistRequest = (payload) => ({
+  type: POST_ADD_PLAYLIST_SONG_REQUEST,
+  payload,
+});
+
+export const postAddSongToPlaylistSuccess = (data) => ({
+  type: POST_ADD_PLAYLIST_SONG_SUCCESS,
+  data,
+});
+
+export const postAddSongToPlaylistFailed = (error) => ({
+  type: POST_ADD_PLAYLIST_SONG_FAILED,
   error,
 });

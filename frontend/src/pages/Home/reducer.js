@@ -10,6 +10,9 @@ import {
   GET_SONG_LIST_REQUEST,
   GET_SONG_LIST_SUCCESS,
   GET_SONG_LIST_FAILED,
+  POST_ADD_PLAYLIST_SONG_REQUEST,
+  POST_ADD_PLAYLIST_SONG_SUCCESS,
+  POST_ADD_PLAYLIST_SONG_FAILED,
 } from './constants';
 
 export const initialState = {
@@ -22,6 +25,10 @@ export const initialState = {
     isError: null,
   },
   songList: {
+    data: [],
+    isError: null,
+  },
+  addPlaylistSong: {
     data: [],
     isError: null,
   },
@@ -75,6 +82,21 @@ const homeReducer = (state = initialState, action) =>
       case GET_SONG_LIST_FAILED:
         draft.songList.isError = action.error;
         draft.songList.data = [];
+        break;
+
+      case POST_ADD_PLAYLIST_SONG_REQUEST:
+        draft.addPlaylistSong.isError = null;
+        draft.addPlaylistSong.data = [];
+        break;
+
+      case POST_ADD_PLAYLIST_SONG_SUCCESS:
+        draft.addPlaylistSong.isError = null;
+        draft.addPlaylistSong.data = action.data;
+        break;
+
+      case POST_ADD_PLAYLIST_SONG_FAILED:
+        draft.addPlaylistSong.isError = action.error;
+        draft.addPlaylistSong.data = [];
         break;
 
       default:

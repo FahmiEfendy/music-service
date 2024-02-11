@@ -36,6 +36,7 @@ export default {
   home_button_secondary: 'Selengkapnya',
   home_artist_popular: 'Artis Populer',
   home_playlist_popular: 'Playlist Populer',
+  home_playlist_button: 'Tambahkan Lagu Ini Ke Playlist Kamu',
   home_song_popular: 'Lagu Populer',
 
   create_playlist_header: 'Buat Playlist',
