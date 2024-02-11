@@ -46,6 +46,7 @@ export default {
   home_failed: 'Gagal',
   home_failed_add_playlist_song: 'Gagal Memasukkan Lagu Baru Ke Playlist',
   home_success_add_playlist_song: 'Berhasil Memasukkan Lagu Baru Ke Playlist',
+  home_error: 'Terjadi Kesalahan',
 
   create_playlist_header: 'Buat Playlist',
   create_playlist_file_label: 'Sampul Playlist',

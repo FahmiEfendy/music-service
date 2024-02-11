@@ -63,8 +63,6 @@ const getPlaylistDetail = async (objectData) => {
 const postCreatePlaylist = async (objectData) => {
   const { id, username, name, playlistCover } = objectData;
 
-  const playlistList = await getPlaylistList();
-
   try {
     const selectedUser = await db.User.findOne({
       where: { id, username },
@@ -79,6 +77,8 @@ const postCreatePlaylist = async (objectData) => {
       "image",
       "image/playlistCover"
     );
+
+    const playlistList = await getPlaylistList();
 
     const newData = db.Playlist.build({
       id: `playlist-${playlistList.length + 1}`,

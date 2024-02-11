@@ -41,6 +41,7 @@ const Profile = ({ userDetail }) => {
 
     dispatch(
       patchUpdateProfileRequest(formData, () => {
+        dispatch(getUserDetailRequest());
         dispatch(showPopup('home_success', 'profile_update_success'));
       })
     );

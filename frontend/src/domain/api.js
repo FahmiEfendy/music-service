@@ -67,7 +67,7 @@ export const postCreatePlaylist = (data) => {
   const header = { 'Content-Type': 'multipart/form-data' };
   return callAPI(urls.createPlaylist, 'POST', header, {}, data);
 };
-export const getplaylistList = (params) => callAPI(urls.playlistList, 'GET', params, {});
+export const getplaylistList = (params) => callAPI(urls.playlistList, 'GET', {}, params, {});
 export const getPlaylistDetail = (id) => callAPI(`${urls.playlistDetail}/${id}`, 'GET');
 // TODO: PATCH Update Playlist
 // TODO: DELETE Remove Playlist

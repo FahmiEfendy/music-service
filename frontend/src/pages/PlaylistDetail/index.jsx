@@ -89,7 +89,7 @@ const PlaylistDetail = ({ playlistDetail }) => {
               ))
             ) : (
               <Typography variant="body1" className={classes.text_center}>
-                <FormattedMessage id="home_no_playlist" />
+                <FormattedMessage id="home_no_song" />
               </Typography>
             )}
           </Grid>

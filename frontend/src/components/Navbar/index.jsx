@@ -8,19 +8,19 @@ import { createStructuredSelector } from 'reselect';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 
-import tokenDecoder from '@utils/tokenDecoder';
 import { setLocale } from '@containers/App/actions';
 import { postLoginReset } from '@pages/Login/actions';
+import { selectUserDetail } from '@pages/Profile/selectors';
+import { getUserDetailRequest } from '@pages/Profile/actions';
 import { setLogin, setToken } from '@containers/Client/actions';
-import { selectLogin as isSelectLogin, selectToken } from '@containers/Client/selectors';
+import { selectLogin as isSelectLogin } from '@containers/Client/selectors';
 
 import classes from './style.module.scss';
 
-const Navbar = ({ title, locale, token, isLogin }) => {
+const Navbar = ({ title, locale, isLogin, userDetail }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState('');
   const [menuPosition, setMenuPosition] = useState(null);
   const [langMenuPosition, setLangMenuPosition] = useState(null);
 
@@ -61,11 +61,8 @@ const Navbar = ({ title, locale, token, isLogin }) => {
   };
 
   useEffect(() => {
-    if (!token) return;
-
-    const data = tokenDecoder(token);
-    setUserData(data);
-  }, [token]);
+    dispatch(getUserDetailRequest());
+  }, [dispatch]);
 
   return (
     <div className={classes.headerWrapper} data-testid="navbar">
@@ -115,15 +112,15 @@ const Navbar = ({ title, locale, token, isLogin }) => {
           <>
             <div className={classes.toolbar}>
               <div className={classes.toggle} onClick={handleClick}>
-                <Avatar className={classes.avatar} src={userData.profilePicture} />
-                <div className={classes.lang}>{userData.fullname}</div>
+                <Avatar className={classes.avatar} src={userDetail?.data?.profilePicture} />
+                <div className={classes.lang}>{userDetail?.data?.fullname}</div>
                 <ExpandMoreIcon />
               </div>
             </div>
             <Menu open={open} anchorEl={menuPosition} onClose={handleClose} className={classes.menu_container}>
               <MenuItem
                 onClick={() => {
-                  navigate(`/user/detail/${userData?.id}`);
+                  navigate(`/user/detail/${userDetail?.data?.id}`);
                 }}
               >
                 <div className={classes.menu}>
@@ -132,8 +129,8 @@ const Navbar = ({ title, locale, token, isLogin }) => {
                   </div>
                 </div>
               </MenuItem>
-              {userData?.role === 'artist' ? (
-                <MenuItem onClick={() => navigate(`/song/list/${userData?.id}`)}>
+              {userDetail?.data?.role === 'artist' ? (
+                <MenuItem onClick={() => navigate(`/song/list/${userDetail?.data?.id}`)}>
                   <div className={classes.menu}>
                     <div className={classes.menuLang}>
                       <FormattedMessage id="nav_my_song" />
@@ -141,7 +138,7 @@ const Navbar = ({ title, locale, token, isLogin }) => {
                   </div>
                 </MenuItem>
               ) : (
-                <MenuItem onClick={() => navigate(`/playlist/list/${userData?.id}`)}>
+                <MenuItem onClick={() => navigate(`/playlist/list/${userDetail?.data?.id}`)}>
                   <div className={classes.menu}>
                     <div className={classes.menuLang}>
                       <FormattedMessage id="nav_my_playlist" />
@@ -171,13 +168,13 @@ const Navbar = ({ title, locale, token, isLogin }) => {
 Navbar.propTypes = {
   title: PropTypes.string,
   locale: PropTypes.string,
-  token: PropTypes.any,
   isLogin: PropTypes.bool,
+  userDetail: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  token: selectToken,
   isLogin: isSelectLogin,
+  userDetail: selectUserDetail,
 });
 
 export default connect(mapStateToProps)(Navbar);

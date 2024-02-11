@@ -153,7 +153,7 @@ const patchUpdateProfile = async (objectData) => {
   const { id, username, fullname, profilePicture } = objectData;
 
   try {
-    const selectedUser = await db.User.findOne({ id, username });
+    const selectedUser = await db.User.findOne({ where: { id, username } });
 
     if (_.isEmpty(selectedUser)) {
       throw Boom.badRequest(`User with username ${username} not found!`);

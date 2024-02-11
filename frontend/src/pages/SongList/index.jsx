@@ -49,7 +49,6 @@ const SongList = ({ songList, token }) => {
   return (
     <Container className={classes.container}>
       <Box className={classes.profile_wrapper}>
-        {/* TODO: Fix Update Profile Picture When Profile Updated */}
         <Avatar className={classes.avatar} src={userData.profilePicture} />
         <Typography variant="h5">{userData?.fullname}</Typography>
       </Box>

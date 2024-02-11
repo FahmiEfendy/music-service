@@ -12,10 +12,9 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 
-import tokenDecoder from '@utils/tokenDecoder';
 import stringLimitter from '@utils/stringLimitter';
 import { showPopup } from '@containers/App/actions';
-import { selectToken } from '@containers/Client/selectors';
+import { selectUserDetail } from '@pages/Profile/selectors';
 import { getSongDetailRequest } from '@components/MusicPlayer/actions';
 import { selectAddPlaylistSong, selectPlaylistList, selectSongList, selectUserList } from './selectors';
 import {
@@ -27,11 +26,10 @@ import {
 
 import classes from './style.module.scss';
 
-const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
+const Home = ({ userList, playlistList, songList, addPlaylistSong, userDetail }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState('');
   const [openedElement, setOpenedElement] = useState(null);
   const [listPlaylistPosition, setPlaylistPosition] = useState(null);
   const [isAddPlaylistSongError, setIsAddPlaylistSongError] = useState(false);
@@ -46,6 +44,8 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
   };
 
   const listPlaylistClickHandler = (element) => (e) => {
+    if (userDetail?.data?.playlists?.length < 1) return dispatch(showPopup('home_error', 'home_no_playlist'));
+
     setPlaylistPosition(e.currentTarget);
     setOpenedElement(element);
   };
@@ -68,21 +68,14 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
     dispatch(getSongListRequest());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!token) return;
-
-    const data = tokenDecoder(token);
-    setUserData(data);
-  }, [token]);
-
   return (
     <Container className={classes.home_container}>
       <Box className={classes.feature_container}>
         <Box className={classes.feature_text}>
           <Typography variant="h5">Unleash the Beats: Your Soundtrack, Your Style</Typography>
           <Typography variant="body1">Where Rhythm Meets Innovation - Hip-Hop Your Way</Typography>
-          {userData?.role ? (
-            userData?.role === 'artist' ? (
+          {userDetail?.data?.role ? (
+            userDetail?.data?.role === 'artist' ? (
               <Button onClick={() => navigate('/song/create')}>
                 <FormattedMessage id="home_button" />
               </Button>
@@ -197,8 +190,7 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
                     horizontal: 'right',
                   }}
                 >
-                  {/* TODO: Fix GET User's Playlist Without Relogin */}
-                  {userData?.playlists?.map((item, index) => (
+                  {userDetail?.data?.playlists?.map((item, index) => (
                     <MenuItem key={index}>
                       <div className={classes.menu}>
                         <div className={classes.menuLang} onClick={() => addToPlaylistHandler(data.id, item.id)}>
@@ -234,19 +226,19 @@ const Home = ({ token, userList, playlistList, songList, addPlaylistSong }) => {
 };
 
 Home.propTypes = {
-  token: PropTypes.string,
   userList: PropTypes.object,
   playlistList: PropTypes.object,
   songList: PropTypes.object,
   addPlaylistSong: PropTypes.object,
+  userDetail: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  token: selectToken,
   userList: selectUserList,
   playlistList: selectPlaylistList,
   songList: selectSongList,
   addPlaylistSong: selectAddPlaylistSong,
+  userDetail: selectUserDetail,
 });
 
 export default connect(mapStateToProps)(Home);
