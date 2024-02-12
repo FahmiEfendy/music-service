@@ -10,6 +10,7 @@ import SongList from '@pages/SongList';
 import CreatePlaylist from '@pages/CreatePlaylist';
 import PlaylistList from '@pages/PlaylistList';
 import PlaylistDetail from '@pages/PlaylistDetail';
+import Forbidden from '@pages/Forbidden';
 
 const routes = [
   {
@@ -52,6 +53,7 @@ const routes = [
         path: '/create',
         name: 'Create Song',
         protected: true,
+        singerOnly: true,
         component: CreateSong,
         layout: MainLayout,
       },
@@ -59,6 +61,7 @@ const routes = [
         path: '/list/:id',
         name: 'My Song List',
         protected: true,
+        singerOnly: true,
         component: SongList,
         layout: MainLayout,
       },
@@ -73,6 +76,7 @@ const routes = [
       { path: '/detail/:id', name: 'Playlist Detail', protected: false, component: PlaylistDetail, layout: MainLayout },
     ],
   },
+  { path: '/forbidden', name: 'Forbidden', component: Forbidden, layout: MainLayout, protected: true },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },
 ];
 

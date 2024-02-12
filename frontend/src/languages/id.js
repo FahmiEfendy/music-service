@@ -71,4 +71,7 @@ export default {
   song_delete: 'Hapus Lagu',
   song_delete_sub: 'Apakah kamu yakin ingin menghapus lagu ini?',
   song_delete_proceed: 'Hapus',
+
+  forbidden: 'Kamu Tidak Memiliki Akses Ke Halaman Ini',
+  go_home: 'Balik Ke Halaman Awal',
 };

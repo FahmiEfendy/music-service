@@ -71,4 +71,7 @@ export default {
   song_delete: 'Delete Song',
   song_delete_sub: 'Are you sure want to delete this song?',
   song_delete_proceed: 'Delete',
+
+  forbidden: 'You Have No Access To This Page',
+  go_home: 'Back To Homepage',
 };
