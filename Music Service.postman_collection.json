@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "6d9c8b37-03d9-42d6-a06e-28df7b61c512",
+		"name": "Music Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21039946"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "[POST] Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"U2FsdGVkX19liE3MnK2eI5l1kcSjJlmG0JLd0qB7qqw=\",\r\n    \"fullname\": \"U2FsdGVkX1/b6lGPFnA/3jTx3y6l4HGZglIyBoNcYuk=\",\r\n    \"role\": \"artist\",\r\n    \"password\": \"U2FsdGVkX18TS+5i48tVTG/f2TFiQlLXi91CCj+YT7g=\",\r\n    \"confirmPassword\": \"U2FsdGVkX1+uGNmVcf1ErkyIcA9Q/iV0GyNAKR+rfL8=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// Login as Artist\r\n{\r\n    \"username\": \"U2FsdGVkX1/utNHwCWI24o2iRvryUYNkp1P7uKPEteQ=\",\r\n    \"password\": \"U2FsdGVkX1+wKc8ovXtwL2zakJaahodixBIUbiKMJwA=\"\r\n}\r\n\r\n// Login as Listener\r\n// {\r\n//     \"username\": \"U2FsdGVkX1+/CjOYYVJuUFbnj5FHXA7mnT1g9QXiEf4=\",\r\n//     \"password\": \"U2FsdGVkX1+RZ0rIpLoE3GStgs8s1Im1Q4upjrJlhmQ=\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/user",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "artist",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] User Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BACKEND_URL}}/user/detail"
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Update Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullname",
+									"value": "Listener Edited",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/profile-2.jpg"
+								}
+							]
+						},
+						"url": "{{BACKEND_URL}}/user/update-profile/"
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"listener\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/user/forgot-password"
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"listener456\",\r\n    \"confirmNewPassword\": \"listener456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/user/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItMiIsInVzZXJuYW1lIjoibGlzdGVuZXIiLCJmdWxsbmFtZSI6Ikxpc3RlbmVyIiwicm9sZSI6Imxpc3RlbmVyIiwicHJvZmlsZVBpY3R1cmUiOiIiLCJwbGF5bGlzdHMiOltdLCJpYXQiOjE3MDc3ODMxOTMsImV4cCI6MTcwNzg2OTU5M30.elfHWfagyrXSPAwHo7xnbbhK2vW9GILvGHwdS6LNBKo"
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] Remove User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BACKEND_URL}}/user/remove"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "[POST] Create Playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Playlist One",
+									"type": "text"
+								},
+								{
+									"key": "playlistCover",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Desktop/download.jpg"
+								}
+							]
+						},
+						"url": "{{BACKEND_URL}}/playlist/create"
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] All Playlists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BACKEND_URL}}/playlist"
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Playlist Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BACKEND_URL}}/playlist/detail/playlist-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Update Playlist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Playlist One Edited\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/playlist/update/playlist-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] Add Song To Playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"song_id\": \"song-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/playlist/add-song/playlist-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] Remove Song From Playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"song_id\": \"song-1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/playlist/remove-song/playlist-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] Remove Playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BACKEND_URL}}/playlist/remove/playlist-1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Song",
+			"item": [
+				{
+					"name": "[POST] Create Song",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test Title",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "Test Genre",
+									"type": "text"
+								},
+								{
+									"key": "song",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/Music/NewJeans - ETA.mp3"
+								},
+								{
+									"key": "songCover",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/profile/eta.png"
+								}
+							]
+						},
+						"url": "{{BACKEND_URL}}/song/create"
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] All Songs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BACKEND_URL}}/song"
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] Song Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BACKEND_URL}}/song/detail/song-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] Update Song",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Song Title Edited\",\r\n    \"genre\": \"Genre Edited\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BACKEND_URL}}/song/update/song-1"
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] Remove Song",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{BACKEND_URL}}/song/remove/song-1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItMSIsInVzZXJuYW1lIjoiYXJ0aXN0IiwiZnVsbG5hbWUiOiJBcnRpc3QiLCJyb2xlIjoiYXJ0aXN0IiwicHJvZmlsZVBpY3R1cmUiOiIiLCJwbGF5bGlzdHMiOlt7ImlkIjoicGxheWxpc3QtNSIsIm5hbWUiOiIyMzIzMjMyMyIsInBsYXlsaXN0Q292ZXIiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RnbjZzenVieC9pbWFnZS91cGxvYWQvdjE3MDc2NTIyNjAvaW1hZ2UvcGxheWxpc3RDb3Zlci9hemw2OG1ja2xnOG04Y3h1NGt6YS5wbmciLCJjcmVhdGVkQXQiOiIyMDI0LTAyLTExIiwidXBkYXRlZEF0IjoiMjAyNC0wMi0xMSIsInVzZXJfaWQiOiJ1c2VyLTEifSx7ImlkIjoicGxheWxpc3QtNiIsIm5hbWUiOiJhc2Rhc2Rhc2QiLCJwbGF5bGlzdENvdmVyIjoiaHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kZ242c3p1YngvaW1hZ2UvdXBsb2FkL3YxNzA3NjUyNDM0L2ltYWdlL3BsYXlsaXN0Q292ZXIvc2gxeGwyZXF4cm5oZWR5YnB4d3IucG5nIiwiY3JlYXRlZEF0IjoiMjAyNC0wMi0xMSIsInVwZGF0ZWRBdCI6IjIwMjQtMDItMTEiLCJ1c2VyX2lkIjoidXNlci0xIn0seyJpZCI6InBsYXlsaXN0LTUiLCJuYW1lIjoiMjMyMzIzMjMiLCJwbGF5bGlzdENvdmVyIjoiaHR0cDovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kZ242c3p1YngvaW1hZ2UvdXBsb2FkL3YxNzA3NjUyMjYwL2ltYWdlL3BsYXlsaXN0Q292ZXIvYXpsNjhtY2tsZzhtOGN4dTRremEucG5nIiwiY3JlYXRlZEF0IjoiMjAyNC0wMi0xMSIsInVwZGF0ZWRBdCI6IjIwMjQtMDItMTEiLCJ1c2VyX2lkIjoidXNlci0xIn0seyJpZCI6InBsYXlsaXN0LTYiLCJuYW1lIjoiYXNkYXNkYXNkIiwicGxheWxpc3RDb3ZlciI6Imh0dHA6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGduNnN6dWJ4L2ltYWdlL3VwbG9hZC92MTcwNzY1MjQzNC9pbWFnZS9wbGF5bGlzdENvdmVyL3NoMXhsMmVxeHJuaGVkeWJweHdyLnBuZyIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMTEiLCJ1cGRhdGVkQXQiOiIyMDI0LTAyLTExIiwidXNlcl9pZCI6InVzZXItMSJ9XSwiaWF0IjoxNzA3NzgzODAxLCJleHAiOjE3MDc4NzAyMDF9.sKXO0pxtRG8gpZWwrLK0mvYp0VGEvU-l-gHb-cNOWxg"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BACKEND_URL",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		}
+	]
+}
